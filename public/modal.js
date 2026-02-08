@@ -12,26 +12,21 @@ let bookingData = {
     date: null,
     time: ''
 };
-let currentWeekStart = null; // Will be set when modal opens
+let calendarStart = null; // First date shown in calendar
 let selectedDate = null;
 let selectedTime = null;
 
-function getMonday(d) {
-    d = new Date(d);
-    const day = d.getDay();
-    const diff = d.getDate() - day + (day === 0 ? -6 : 1);
-    return new Date(d.setDate(diff));
-}
-
-function getNextAvailableWeek() {
-    return getMonday(new Date());
+function getToday() {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
 }
 
 function openModal() {
     document.getElementById('bookingModal').classList.add('active');
     document.body.style.overflow = 'hidden';
     currentStep = 1;
-    currentWeekStart = getNextAvailableWeek();
+    calendarStart = getToday();
     updateProgress();
     showStep(1);
     generateCalendar();
@@ -128,29 +123,30 @@ function generateCalendar() {
     if (!container) return;
     container.innerHTML = '';
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = getToday();
 
     for (let i = 0; i < 7; i++) {
-        const date = new Date(currentWeekStart);
+        const date = new Date(calendarStart);
         date.setDate(date.getDate() + i);
 
         const dayEl = document.createElement('button');
         dayEl.className = 'calendar-day';
 
-        const isPast = date < today;
-
-        if (isPast) {
-            dayEl.classList.add('disabled');
-            dayEl.disabled = true;
-        }
+        // Get correct day name based on actual day of week (0=Sun, 1=Mon, ...)
+        const jsDay = date.getDay();
+        const dayIndex = jsDay === 0 ? 6 : jsDay - 1; // Convert to Mon=0, Sun=6
 
         if (selectedDate && date.toDateString() === selectedDate.toDateString()) {
             dayEl.classList.add('selected');
         }
 
+        // Mark today
+        if (date.toDateString() === today.toDateString()) {
+            dayEl.classList.add('today');
+        }
+
         dayEl.innerHTML = `
-            <span class="day-name">${dayNames[i]}</span>
+            <span class="day-name">${dayNames[dayIndex]}</span>
             <span class="day-number">${date.getDate()}</span>
         `;
 
@@ -159,32 +155,36 @@ function generateCalendar() {
     }
 
     // Update month display
-    const endOfWeek = new Date(currentWeekStart);
-    endOfWeek.setDate(endOfWeek.getDate() + 6);
+    const endDate = new Date(calendarStart);
+    endDate.setDate(endDate.getDate() + 6);
 
     const monthEl = document.getElementById('calendarMonth');
     if (monthEl) {
-        if (currentWeekStart.getMonth() === endOfWeek.getMonth()) {
-            monthEl.textContent = `${monthNames[currentWeekStart.getMonth()]} ${currentWeekStart.getFullYear()}`;
+        if (calendarStart.getMonth() === endDate.getMonth()) {
+            monthEl.textContent = `${monthNames[calendarStart.getMonth()]} ${calendarStart.getFullYear()}`;
         } else {
-            monthEl.textContent = `${monthNames[currentWeekStart.getMonth()]} - ${monthNames[endOfWeek.getMonth()]} ${endOfWeek.getFullYear()}`;
+            monthEl.textContent = `${monthNames[calendarStart.getMonth()]} - ${monthNames[endDate.getMonth()]} ${endDate.getFullYear()}`;
         }
     }
 }
 
 function prevWeek() {
-    const minWeek = getNextAvailableWeek();
-    const newWeek = new Date(currentWeekStart);
-    newWeek.setDate(newWeek.getDate() - 7);
+    const today = getToday();
+    const newStart = new Date(calendarStart);
+    newStart.setDate(newStart.getDate() - 7);
 
-    if (newWeek >= minWeek) {
-        currentWeekStart = newWeek;
-        generateCalendar();
+    // Don't go before today
+    if (newStart < today) {
+        calendarStart = new Date(today);
+    } else {
+        calendarStart = newStart;
     }
+    generateCalendar();
 }
 
 function nextWeek() {
-    currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+    calendarStart = new Date(calendarStart);
+    calendarStart.setDate(calendarStart.getDate() + 7);
     generateCalendar();
 }
 

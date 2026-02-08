@@ -2158,6 +2158,15 @@ footer {
     cursor: not-allowed;
 }
 
+.calendar-day.today {
+    border-color: var(--primary-light);
+    background: var(--primary-bg);
+}
+
+.calendar-day.today .day-name {
+    color: var(--primary);
+}
+
 .day-name {
     font-size: 0.7rem;
     font-weight: 600;
