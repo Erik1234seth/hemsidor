@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exempel - Webbyrå</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"></div>
+                Webbyrå
+            </a>
+            <ul class="nav-links">
+                <li><a href="om-oss.html">Om oss</a></li>
+                <li><a href="exempel.html" class="active">Exempel</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+            </ul>
+            <a href="kontakt.html" class="nav-cta">Kom igång gratis</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <div class="container">
+                <div class="page-hero-content">
+                    <div class="section-label">Exempel</div>
+                    <h1>Se vad vi kan skapa åt dig</h1>
+                    <p class="page-hero-text">Utforska exempel på hemsidor för olika branscher. Varje hemsida anpassas efter just dina behov.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Examples Grid -->
+        <section class="examples-page">
+            <div class="container">
+                <!-- Frisör Example -->
+                <div class="example-card" id="frisor">
+                    <div class="example-browser">
+                        <div class="browser-bar-large">
+                            <div class="browser-dots"><span></span><span></span><span></span></div>
+                            <div class="browser-url-bar">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <path d="M7 1v4M7 9v4M1 7h4M9 7h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                                <span class="url-text">www.salongbella.se</span>
+                            </div>
+                        </div>
+                        <div class="preview-site">
+                            <nav class="preview-nav frisor-nav">
+                                <div class="preview-logo">
+                                    <span class="logo-dot pink"></span>
+                                    Salong Bella
+                                </div>
+                                <div class="preview-nav-links">
+                                    <span class="active">Hem</span>
+                                    <span>Tjänster</span>
+                                    <span>Priser</span>
+                                    <span>Om oss</span>
+                                </div>
+                                <div class="preview-nav-btn pink-btn">Boka tid</div>
+                            </nav>
+                            <div class="preview-hero-full frisor-hero-full">
+                                <div class="preview-hero-text">
+                                    <span class="preview-badge">Nyöppnat i Göteborg</span>
+                                    <h2 class="preview-heading">Välkommen till<br><span class="highlight-pink">Salong Bella</span></h2>
+                                    <p class="preview-paragraph">Vi erbjuder professionell hårvård i en avslappnad miljö. Klippning, färgning, slingor och styling av erfarna frisörer.</p>
+                                    <div class="preview-cta-row">
+                                        <span class="preview-btn-lg pink-btn">Boka din tid</span>
+                                        <span class="preview-btn-outline">Se våra priser</span>
+                                    </div>
+                                </div>
+                                <div class="preview-hero-img">
+                                    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&h=300&fit=crop" alt="Salong">
+                                </div>
+                            </div>
+                            <div class="preview-services-row">
+                                <div class="preview-service-item">
+                                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=120&h=80&fit=crop" alt="Klippning">
+                                    <div class="service-info">
+                                        <span class="service-name">Klippning</span>
+                                        <span class="service-desc">Dam & Herr</span>
+                                    </div>
+                                    <span class="service-price-tag">350 kr</span>
+                                </div>
+                                <div class="preview-service-item">
+                                    <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=120&h=80&fit=crop" alt="Färgning">
+                                    <div class="service-info">
+                                        <span class="service-name">Färgning</span>
+                                        <span class="service-desc">Helfärg & slingor</span>
+                                    </div>
+                                    <span class="service-price-tag">800 kr</span>
+                                </div>
+                                <div class="preview-service-item">
+                                    <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=120&h=80&fit=crop" alt="Styling">
+                                    <div class="service-info">
+                                        <span class="service-name">Styling</span>
+                                        <span class="service-desc">Fest & vardag</span>
+                                    </div>
+                                    <span class="service-price-tag">250 kr</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="example-details">
+                        <span class="example-category">Frisör & Skönhet</span>
+                        <h3>Salong Bella</h3>
+                        <p>En modern och inbjudande hemsida för frisörer. Enkel bokning, tydliga priser och en design som får nya kunder att känna sig välkomna.</p>
+                        <ul class="example-features">
+                            <li>Online-bokning</li>
+                            <li>Prislista</li>
+                            <li>Bildgalleri</li>
+                            <li>Mobilanpassad</li>
+                        </ul>
+                        <a href="kontakt.html" class="btn btn-primary">Jag vill ha en sådan här</a>
+                    </div>
+                </div>
+
+                <!-- Restaurang Example -->
+                <div class="example-card reverse" id="restaurang">
+                    <div class="example-browser">
+                        <div class="browser-bar-large">
+                            <div class="browser-dots"><span></span><span></span><span></span></div>
+                            <div class="browser-url-bar">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <path d="M7 1v4M7 9v4M1 7h4M9 7h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                                <span class="url-text">www.trattoriaroma.se</span>
+                            </div>
+                        </div>
+                        <div class="preview-site">
+                            <nav class="preview-nav dark-nav">
+                                <div class="preview-logo">
+                                    <span class="logo-icon-text">TR</span>
+                                    Trattoria Roma
+                                </div>
+                                <div class="preview-nav-links">
+                                    <span class="active">Hem</span>
+                                    <span>Meny</span>
+                                    <span>Om oss</span>
+                                    <span>Kontakt</span>
+                                </div>
+                                <div class="preview-nav-btn gold-btn">Boka bord</div>
+                            </nav>
+                            <div class="preview-hero-img-bg">
+                                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&h=280&fit=crop" alt="Restaurang">
+                                <div class="hero-overlay"></div>
+                                <div class="hero-center-content">
+                                    <span class="preview-badge gold-badge">Äkta italienskt sedan 2010</span>
+                                    <h2 class="preview-heading light">Välkommen till<br>Trattoria Roma</h2>
+                                    <p class="preview-paragraph light">Handgjord pasta, färska ingredienser och genuina smaker.</p>
+                                    <div class="preview-cta-row center">
+                                        <span class="preview-btn-lg gold-btn">Se vår meny</span>
+                                        <span class="preview-btn-outline light">Boka bord</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="preview-stats-bar dark">
+                                <div class="stat-item">
+                                    <span class="stat-value">15+</span>
+                                    <span class="stat-label">Års erfarenhet</span>
+                                </div>
+                                <div class="stat-divider"></div>
+                                <div class="stat-item">
+                                    <span class="stat-value">50+</span>
+                                    <span class="stat-label">Rätter på menyn</span>
+                                </div>
+                                <div class="stat-divider"></div>
+                                <div class="stat-item">
+                                    <span class="stat-value">4.8</span>
+                                    <span class="stat-label">Google betyg</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="example-details">
+                        <span class="example-category">Restaurang & Café</span>
+                        <h3>Trattoria Roma</h3>
+                        <p>En elegant hemsida för restauranger. Visa upp din meny, ta emot bordsreservationer och dela atmosfären från din restaurang.</p>
+                        <ul class="example-features">
+                            <li>Digital meny</li>
+                            <li>Bordsbokning</li>
+                            <li>Bildgalleri</li>
+                            <li>Öppettider</li>
+                        </ul>
+                        <a href="kontakt.html" class="btn btn-primary">Jag vill ha en sådan här</a>
+                    </div>
+                </div>
+
+                <!-- Hantverkare Example -->
+                <div class="example-card" id="hantverkare">
+                    <div class="example-browser">
+                        <div class="browser-bar-large">
+                            <div class="browser-dots"><span></span><span></span><span></span></div>
+                            <div class="browser-url-bar">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <path d="M7 1v4M7 9v4M1 7h4M9 7h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                                <span class="url-text">www.johanssonsbygg.se</span>
+                            </div>
+                        </div>
+                        <div class="preview-site">
+                            <nav class="preview-nav">
+                                <div class="preview-logo">
+                                    <span class="logo-square green"></span>
+                                    Johanssons Bygg
+                                </div>
+                                <div class="preview-nav-links">
+                                    <span class="active">Start</span>
+                                    <span>Tjänster</span>
+                                    <span>Projekt</span>
+                                    <span>Kontakt</span>
+                                </div>
+                                <div class="preview-nav-btn green-btn">Få offert</div>
+                            </nav>
+                            <div class="preview-hero-split">
+                                <div class="hero-split-content">
+                                    <span class="preview-badge green-badge">Lokalt byggföretag sedan 2004</span>
+                                    <h2 class="preview-heading">Renovering & <span class="highlight-green">nybyggnation</span></h2>
+                                    <p class="preview-paragraph">Vi hjälper dig med allt från badrumsrenovering till nybyggnation. 20 års erfarenhet.</p>
+                                    <div class="preview-cta-row">
+                                        <span class="preview-btn-lg green-btn">Begär gratis offert</span>
+                                    </div>
+                                    <div class="trust-badges">
+                                        <span class="trust-badge">
+                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11.667 3.5L5.25 9.917 2.333 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                            Auktoriserad
+                                        </span>
+                                        <span class="trust-badge">
+                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11.667 3.5L5.25 9.917 2.333 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                            10 års garanti
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="hero-split-image">
+                                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=350&h=280&fit=crop" alt="Byggprojekt">
+                                    <div class="image-badge">
+                                        <span class="badge-number">200+</span>
+                                        <span class="badge-text">Projekt</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="preview-projects-bar">
+                                <span class="projects-label">Senaste projekt:</span>
+                                <div class="project-thumbs">
+                                    <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=60&h=45&fit=crop" alt="Projekt 1">
+                                    <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=60&h=45&fit=crop" alt="Projekt 2">
+                                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=60&h=45&fit=crop" alt="Projekt 3">
+                                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=60&h=45&fit=crop" alt="Projekt 4">
+                                </div>
+                                <span class="projects-link">Se alla projekt</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="example-details">
+                        <span class="example-category">Bygg & Hantverk</span>
+                        <h3>Johanssons Bygg</h3>
+                        <p>En professionell hemsida för hantverkare. Visa tidigare projekt, få in offertförfrågningar och bygg förtroende hos nya kunder.</p>
+                        <ul class="example-features">
+                            <li>Offertformulär</li>
+                            <li>Projektgalleri</li>
+                            <li>Kundrecensioner</li>
+                            <li>Kontaktinfo</li>
+                        </ul>
+                        <a href="kontakt.html" class="btn btn-primary">Jag vill ha en sådan här</a>
+                    </div>
+                </div>
+
+                <!-- Konsult Example -->
+                <div class="example-card reverse" id="konsult">
+                    <div class="example-browser">
+                        <div class="browser-bar-large">
+                            <div class="browser-dots"><span></span><span></span><span></span></div>
+                            <div class="browser-url-bar">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <path d="M7 1v4M7 9v4M1 7h4M9 7h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                                <span class="url-text">www.eriklindberg.se</span>
+                            </div>
+                        </div>
+                        <div class="preview-site">
+                            <nav class="preview-nav minimal-nav">
+                                <div class="preview-logo">
+                                    Erik Lindberg
+                                </div>
+                                <div class="preview-nav-links">
+                                    <span class="active">Hem</span>
+                                    <span>Om mig</span>
+                                    <span>Tjänster</span>
+                                    <span>Kontakt</span>
+                                </div>
+                                <div class="preview-nav-btn">Boka möte</div>
+                            </nav>
+                            <div class="preview-hero-split konsult-split">
+                                <div class="hero-split-content">
+                                    <span class="preview-badge">Affärskonsult & rådgivare</span>
+                                    <h2 class="preview-heading">Jag hjälper ditt <span class="highlight-blue">företag växa</span></h2>
+                                    <p class="preview-paragraph">Med 15 års erfarenhet hjälper jag småföretag att öka sin lönsamhet och nå sina mål.</p>
+                                    <div class="preview-cta-row">
+                                        <span class="preview-btn-lg">Boka gratis samtal</span>
+                                        <span class="preview-btn-outline">Se mina tjänster</span>
+                                    </div>
+                                </div>
+                                <div class="hero-split-image konsult-image">
+                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=280&h=320&fit=crop&crop=top" alt="Erik Lindberg">
+                                </div>
+                            </div>
+                            <div class="preview-clients-bar">
+                                <span class="clients-label">Företag jag har hjälpt:</span>
+                                <div class="client-logos">
+                                    <div class="client-logo">Företag AB</div>
+                                    <div class="client-logo">Tech Nordic</div>
+                                    <div class="client-logo">Startup Co</div>
+                                    <div class="client-logo">Konsult HB</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="example-details">
+                        <span class="example-category">Konsult & Tjänster</span>
+                        <h3>Erik Lindberg</h3>
+                        <p>En personlig hemsida för konsulter. Presentera din expertis, visa upp case studies och gör det enkelt för kunder att boka möten.</p>
+                        <ul class="example-features">
+                            <li>Mötesbokning</li>
+                            <li>Case studies</li>
+                            <li>Om mig-sektion</li>
+                            <li>Blogg</li>
+                        </ul>
+                        <a href="kontakt.html" class="btn btn-primary">Jag vill ha en sådan här</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-card">
+                    <div class="cta-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M16 2v28M2 16h28" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h2>Hittar du inte din bransch?</h2>
+                    <p>Ingen fara! Vi skapar hemsidor för alla typer av företag. Berätta vad du gör så designar vi något perfekt för dig.</p>
+                    <a href="kontakt.html" class="btn btn-primary">
+                        Berätta om ditt företag
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-mark"></div>
+                        Webbyrå
+                    </a>
+                    <p>Vi hjälper företagare att få sin första hemsida — enkelt och utan krångel.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="om-oss.html">Om oss</a>
+                    <a href="exempel.html">Exempel</a>
+                    <a href="kontakt.html">Kontakt</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Webbyrå. Alla rättigheter reserverade.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
