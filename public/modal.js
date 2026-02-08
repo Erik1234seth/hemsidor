@@ -161,6 +161,13 @@ function generateCalendar() {
 
         dayEl.onclick = () => selectDate(date, dayEl);
         container.appendChild(dayEl);
+
+        // Auto-select today on first load
+        if (!selectedDate && date.toDateString() === today.toDateString()) {
+            selectedDate = date;
+            dayEl.classList.add('selected');
+            setTimeout(() => generateTimeSlots(), 0);
+        }
     }
 
     // Update month display
