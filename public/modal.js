@@ -303,7 +303,7 @@ async function confirmBooking() {
 
 // Supabase configuration
 const SUPABASE_URL = 'https://xklttbborrdoettifjak.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE'; // Replace with your anon key
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhrbHR0YmJvcnJkb2V0dGlmamFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA1MzQ3ODIsImV4cCI6MjA4NjExMDc4Mn0.iJIs2lgGF0fCL8CqrUMg1n4FaJ55adwK5HLk7ooxb4M';
 
 async function saveBookingToSupabase(booking) {
     const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
