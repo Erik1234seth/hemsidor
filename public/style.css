@@ -1758,6 +1758,520 @@ footer {
     font-weight: 600;
 }
 
+/* ===== Booking Modal ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: white;
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 40px;
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal {
+    transform: translateY(0) scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: var(--bg-subtle);
+    border-radius: 50%;
+    font-size: 24px;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.modal-close:hover {
+    background: var(--bg-muted);
+    color: var(--text);
+}
+
+/* Modal Progress */
+.modal-progress {
+    margin-bottom: 32px;
+}
+
+.progress-bar {
+    height: 6px;
+    background: var(--bg-muted);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 20%;
+}
+
+.progress-text {
+    font-size: 0.8rem;
+    color: var(--text-subtle);
+}
+
+/* Modal Steps */
+.modal-step {
+    display: none;
+}
+
+.modal-step.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.modal-step h2 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.modal-desc {
+    color: var(--text-muted);
+    margin-bottom: 28px;
+}
+
+/* Option Grid */
+.option-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.option-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 16px;
+    background: var(--bg-subtle);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.option-card:hover {
+    border-color: var(--primary);
+    background: var(--primary-bg);
+}
+
+.option-card.selected {
+    border-color: var(--primary);
+    background: var(--primary-bg);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.option-icon {
+    width: 56px;
+    height: 56px;
+    background: white;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+}
+
+.option-card.selected .option-icon {
+    background: var(--primary);
+    color: white;
+}
+
+/* Option List */
+.option-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-card-wide {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    background: var(--bg-subtle);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    text-align: left;
+    width: 100%;
+}
+
+.option-card-wide:hover {
+    border-color: var(--primary);
+    background: var(--primary-bg);
+}
+
+.option-card-wide.selected {
+    border-color: var(--primary);
+    background: var(--primary-bg);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.option-icon-sm {
+    width: 44px;
+    height: 44px;
+    background: white;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.option-card-wide.selected .option-icon-sm {
+    background: var(--primary);
+    color: white;
+}
+
+.option-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.option-title {
+    font-weight: 600;
+    color: var(--text);
+}
+
+.option-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Checkbox Grid */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.checkbox-card {
+    display: block;
+    cursor: pointer;
+}
+
+.checkbox-card input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.checkbox-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--bg-subtle);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.checkbox-card:hover .checkbox-content {
+    border-color: var(--primary);
+}
+
+.checkbox-card input:checked + .checkbox-content {
+    border-color: var(--primary);
+    background: var(--primary-bg);
+}
+
+.checkbox-icon {
+    width: 24px;
+    height: 24px;
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.checkbox-card input:checked + .checkbox-content .checkbox-icon {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+/* Modal Form */
+.modal-form .form-group {
+    margin-bottom: 16px;
+}
+
+.modal-form .form-group:last-child {
+    margin-bottom: 28px;
+}
+
+/* Modal Buttons */
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 28px;
+}
+
+.modal-back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-back:hover {
+    color: var(--text);
+}
+
+/* Calendar */
+.calendar-container {
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.calendar-month {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.calendar-nav {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.2s;
+}
+
+.calendar-nav:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.calendar-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 8px;
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.calendar-day:hover:not(.disabled) {
+    border-color: var(--primary);
+}
+
+.calendar-day.selected {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: white;
+}
+
+.calendar-day.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.day-name {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.calendar-day.selected .day-name {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.day-number {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Time Slots */
+.time-slots {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.time-slots-placeholder {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--text-muted);
+    padding: 20px;
+    font-size: 0.9rem;
+}
+
+.time-slot {
+    padding: 12px;
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.time-slot:hover:not(.unavailable) {
+    border-color: var(--primary);
+}
+
+.time-slot.selected {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: white;
+}
+
+.time-slot.unavailable {
+    opacity: 0.4;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+/* Confirmation */
+.confirmation-content {
+    text-align: center;
+}
+
+.confirmation-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    background: var(--success-bg);
+    color: var(--success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirmation-details {
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: 28px 0;
+}
+
+.confirmation-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.confirmation-item:last-child {
+    border-bottom: none;
+}
+
+.confirmation-label {
+    color: var(--text-muted);
+}
+
+.confirmation-value {
+    font-weight: 600;
+}
+
+.confirmation-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+#confirmBooking:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 1024px) {
     .hero .container {
@@ -1827,4 +2341,14 @@ footer {
     .process-step:not(:last-child)::before { left: 19px; }
     .example-card { margin-bottom: 50px; padding-bottom: 50px; }
     .example-details h3 { font-size: 1.5rem; }
+    /* Modal responsive */
+    .modal { padding: 24px; max-height: 95vh; }
+    .option-grid { grid-template-columns: repeat(2, 1fr); }
+    .checkbox-grid { grid-template-columns: 1fr; }
+    .calendar-days { gap: 4px; }
+    .calendar-day { padding: 8px 4px; }
+    .day-name { font-size: 0.6rem; }
+    .day-number { font-size: 0.9rem; }
+    .time-slots { grid-template-columns: repeat(3, 1fr); }
+    .modal-step h2 { font-size: 1.25rem; }
 }

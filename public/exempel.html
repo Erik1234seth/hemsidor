@@ -381,5 +381,90 @@
             </div>
         </div>
     </footer>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-progress">
+                <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                <span class="progress-text" id="progressText">Steg 1 av 5</span>
+            </div>
+
+            <div class="modal-step active" id="step1">
+                <h2>Vilken typ av verksamhet har du?</h2>
+                <p class="modal-desc">Välj det som passar bäst så kan vi anpassa förslaget efter dig.</p>
+                <div class="option-grid">
+                    <button class="option-card" data-value="frisor" onclick="selectOption(this, 'business')"><div class="option-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM8 28v-3a8 8 0 0 1 16 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Frisör / Skönhet</span></button>
+                    <button class="option-card" data-value="restaurang" onclick="selectOption(this, 'business')"><div class="option-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M5 15h22M8 9h16M11 21h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Restaurang / Café</span></button>
+                    <button class="option-card" data-value="hantverkare" onclick="selectOption(this, 'business')"><div class="option-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M20 8L8 20M14 6l6 6M6 14l6 6M24 12l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Bygg / Hantverk</span></button>
+                    <button class="option-card" data-value="konsult" onclick="selectOption(this, 'business')"><div class="option-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 6h20v20H6zM12 12h8M12 16h8M12 20h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Konsult / Tjänster</span></button>
+                    <button class="option-card" data-value="butik" onclick="selectOption(this, 'business')"><div class="option-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M4 12l4-6h16l4 6M4 12h24v14H4zM12 26v-8h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Butik / E-handel</span></button>
+                    <button class="option-card" data-value="annat" onclick="selectOption(this, 'business')"><div class="option-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="2"/><path d="M16 12v8M12 16h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Annat</span></button>
+                </div>
+            </div>
+
+            <div class="modal-step" id="step2">
+                <h2>Har du en hemsida idag?</h2>
+                <p class="modal-desc">Detta hjälper oss förstå var du befinner dig.</p>
+                <div class="option-list">
+                    <button class="option-card-wide" data-value="no" onclick="selectOption(this, 'hasWebsite')"><div class="option-icon-sm"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="option-text"><span class="option-title">Nej, jag behöver min första hemsida</span><span class="option-subtitle">Perfekt! Vi hjälper dig komma igång</span></div></button>
+                    <button class="option-card-wide" data-value="yes-update" onclick="selectOption(this, 'hasWebsite')"><div class="option-icon-sm"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="option-text"><span class="option-title">Ja, men den behöver förnyas</span><span class="option-subtitle">Dags för en modern uppfräschning</span></div></button>
+                    <button class="option-card-wide" data-value="yes-new" onclick="selectOption(this, 'hasWebsite')"><div class="option-icon-sm"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="2"/><path d="M9 9h6M9 12h6M9 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="option-text"><span class="option-title">Ja, men jag vill ha en helt ny</span><span class="option-subtitle">Vi bygger något nytt från grunden</span></div></button>
+                </div>
+                <button class="modal-back" onclick="prevStep()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Tillbaka</button>
+            </div>
+
+            <div class="modal-step" id="step3">
+                <h2>Vad är viktigast för dig?</h2>
+                <p class="modal-desc">Välj allt som stämmer in på dig.</p>
+                <div class="checkbox-grid">
+                    <label class="checkbox-card"><input type="checkbox" name="goals" value="customers"><span class="checkbox-content"><span class="checkbox-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Få fler kunder</span></label>
+                    <label class="checkbox-card"><input type="checkbox" name="goals" value="professional"><span class="checkbox-content"><span class="checkbox-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Se professionell ut</span></label>
+                    <label class="checkbox-card"><input type="checkbox" name="goals" value="showcase"><span class="checkbox-content"><span class="checkbox-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Visa upp mitt arbete</span></label>
+                    <label class="checkbox-card"><input type="checkbox" name="goals" value="booking"><span class="checkbox-content"><span class="checkbox-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ta emot bokningar</span></label>
+                    <label class="checkbox-card"><input type="checkbox" name="goals" value="google"><span class="checkbox-content"><span class="checkbox-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Synas på Google</span></label>
+                    <label class="checkbox-card"><input type="checkbox" name="goals" value="sell"><span class="checkbox-content"><span class="checkbox-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Sälja produkter online</span></label>
+                </div>
+                <div class="modal-buttons"><button class="modal-back" onclick="prevStep()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Tillbaka</button><button class="btn btn-primary" onclick="nextStep()">Fortsätt<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 12l4-4-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+            </div>
+
+            <div class="modal-step" id="step4">
+                <h2>Dina uppgifter</h2>
+                <p class="modal-desc">Så vi kan kontakta dig inför samtalet.</p>
+                <form class="modal-form" id="contactForm">
+                    <div class="form-group"><label for="modal-name">Ditt namn *</label><input type="text" id="modal-name" name="name" placeholder="Anna Andersson" required></div>
+                    <div class="form-group"><label for="modal-email">Din email *</label><input type="email" id="modal-email" name="email" placeholder="anna@exempel.se" required></div>
+                    <div class="form-group"><label for="modal-phone">Telefon (valfritt)</label><input type="tel" id="modal-phone" name="phone" placeholder="070-123 45 67"></div>
+                    <div class="form-group"><label for="modal-company">Företagsnamn (valfritt)</label><input type="text" id="modal-company" name="company" placeholder="Ditt Företag AB"></div>
+                </form>
+                <div class="modal-buttons"><button class="modal-back" onclick="prevStep()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Tillbaka</button><button class="btn btn-primary" onclick="validateAndNext()">Fortsätt till bokning<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 12l4-4-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+            </div>
+
+            <div class="modal-step" id="step5">
+                <h2>Välj tid för ditt gratis samtal</h2>
+                <p class="modal-desc">Välj en dag och tid som passar dig. Samtalet tar ca 15 minuter.</p>
+                <div class="calendar-container">
+                    <div class="calendar-header"><button class="calendar-nav" onclick="prevWeek()"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 15l-5-5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="calendar-month" id="calendarMonth">Januari 2025</span><button class="calendar-nav" onclick="nextWeek()"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 15l5-5-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+                    <div class="calendar-days" id="calendarDays"></div>
+                    <div class="time-slots" id="timeSlots"><p class="time-slots-placeholder">Välj en dag för att se tillgängliga tider</p></div>
+                </div>
+                <div class="modal-buttons"><button class="modal-back" onclick="prevStep()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Tillbaka</button><button class="btn btn-primary" id="confirmBooking" onclick="confirmBooking()" disabled>Boka samtal<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.333 4L6 11.333 2.667 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+            </div>
+
+            <div class="modal-step" id="stepConfirm">
+                <div class="confirmation-content">
+                    <div class="confirmation-icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="3"/><path d="M32 18L21 29l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    <h2>Tack för din bokning!</h2>
+                    <p class="modal-desc">Vi har skickat en bekräftelse till din email.</p>
+                    <div class="confirmation-details"><div class="confirmation-item"><span class="confirmation-label">Datum & tid</span><span class="confirmation-value" id="confirmDateTime">-</span></div><div class="confirmation-item"><span class="confirmation-label">Samtalstyp</span><span class="confirmation-value">Gratis rådgivning (15 min)</span></div></div>
+                    <p class="confirmation-note">Vi ringer dig på det nummer du angett, eller kontaktar dig via email om inget nummer angavs.</p>
+                    <button class="btn btn-primary" onclick="closeModal()">Stäng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="modal.js"></script>
 </body>
 </html>
