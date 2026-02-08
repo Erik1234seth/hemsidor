@@ -24,20 +24,7 @@ function getMonday(d) {
 }
 
 function getNextAvailableWeek() {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const dayOfWeek = today.getDay();
-
-    // If it's weekend (Saturday=6, Sunday=0) or Friday afternoon, start from next Monday
-    if (dayOfWeek === 0 || dayOfWeek === 6 || dayOfWeek === 5) {
-        const nextMonday = new Date(today);
-        const daysUntilMonday = dayOfWeek === 0 ? 1 : (8 - dayOfWeek);
-        nextMonday.setDate(today.getDate() + daysUntilMonday);
-        return nextMonday;
-    }
-
-    // Otherwise, use current week's Monday
-    return getMonday(today);
+    return getMonday(new Date());
 }
 
 function openModal() {
@@ -151,10 +138,9 @@ function generateCalendar() {
         const dayEl = document.createElement('button');
         dayEl.className = 'calendar-day';
 
-        const isWeekend = i >= 5;
         const isPast = date < today;
 
-        if (isWeekend || isPast) {
+        if (isPast) {
             dayEl.classList.add('disabled');
             dayEl.disabled = true;
         }
