@@ -24,9 +24,11 @@ function getToday() {
 
 function getMonday(d) {
     d = new Date(d);
+    d.setHours(0, 0, 0, 0);
     const day = d.getDay();
     const diff = d.getDate() - day + (day === 0 ? -6 : 1);
-    return new Date(d.setDate(diff));
+    d.setDate(diff);
+    return d;
 }
 
 function openModal() {
