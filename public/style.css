@@ -2167,6 +2167,16 @@ footer {
     color: var(--primary);
 }
 
+.calendar-day.today.selected {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.calendar-day.today.selected .day-name {
+    color: rgba(255, 255, 255, 0.8);
+}
+
 .day-name {
     font-size: 0.7rem;
     font-weight: 600;

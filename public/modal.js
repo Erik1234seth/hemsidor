@@ -22,11 +22,18 @@ function getToday() {
     return d;
 }
 
+function getMonday(d) {
+    d = new Date(d);
+    const day = d.getDay();
+    const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+    return new Date(d.setDate(diff));
+}
+
 function openModal() {
     document.getElementById('bookingModal').classList.add('active');
     document.body.style.overflow = 'hidden';
     currentStep = 1;
-    calendarStart = getToday();
+    calendarStart = getMonday(new Date());
     updateProgress();
     showStep(1);
     generateCalendar();
@@ -132,9 +139,11 @@ function generateCalendar() {
         const dayEl = document.createElement('button');
         dayEl.className = 'calendar-day';
 
-        // Get correct day name based on actual day of week (0=Sun, 1=Mon, ...)
-        const jsDay = date.getDay();
-        const dayIndex = jsDay === 0 ? 6 : jsDay - 1; // Convert to Mon=0, Sun=6
+        const isPast = date < today;
+        if (isPast) {
+            dayEl.classList.add('disabled');
+            dayEl.disabled = true;
+        }
 
         if (selectedDate && date.toDateString() === selectedDate.toDateString()) {
             dayEl.classList.add('selected');
@@ -146,7 +155,7 @@ function generateCalendar() {
         }
 
         dayEl.innerHTML = `
-            <span class="day-name">${dayNames[dayIndex]}</span>
+            <span class="day-name">${dayNames[i]}</span>
             <span class="day-number">${date.getDate()}</span>
         `;
 
@@ -169,17 +178,14 @@ function generateCalendar() {
 }
 
 function prevWeek() {
-    const today = getToday();
+    const minWeek = getMonday(new Date());
     const newStart = new Date(calendarStart);
     newStart.setDate(newStart.getDate() - 7);
 
-    // Don't go before today
-    if (newStart < today) {
-        calendarStart = new Date(today);
-    } else {
+    if (newStart >= minWeek) {
         calendarStart = newStart;
+        generateCalendar();
     }
-    generateCalendar();
 }
 
 function nextWeek() {
