@@ -342,6 +342,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Auto-open modal on page load
+    openModal();
+
     // Close on overlay click
     const modal = document.getElementById('bookingModal');
     if (modal) {
