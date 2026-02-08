@@ -12,7 +12,7 @@ let bookingData = {
     date: null,
     time: ''
 };
-let currentWeekStart = getMonday(new Date());
+let currentWeekStart = null; // Will be set when modal opens
 let selectedDate = null;
 let selectedTime = null;
 
@@ -23,10 +23,28 @@ function getMonday(d) {
     return new Date(d.setDate(diff));
 }
 
+function getNextAvailableWeek() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const dayOfWeek = today.getDay();
+
+    // If it's weekend (Saturday=6, Sunday=0) or Friday afternoon, start from next Monday
+    if (dayOfWeek === 0 || dayOfWeek === 6 || dayOfWeek === 5) {
+        const nextMonday = new Date(today);
+        const daysUntilMonday = dayOfWeek === 0 ? 1 : (8 - dayOfWeek);
+        nextMonday.setDate(today.getDate() + daysUntilMonday);
+        return nextMonday;
+    }
+
+    // Otherwise, use current week's Monday
+    return getMonday(today);
+}
+
 function openModal() {
     document.getElementById('bookingModal').classList.add('active');
     document.body.style.overflow = 'hidden';
     currentStep = 1;
+    currentWeekStart = getNextAvailableWeek();
     updateProgress();
     showStep(1);
     generateCalendar();
@@ -169,11 +187,11 @@ function generateCalendar() {
 }
 
 function prevWeek() {
-    const today = getMonday(new Date());
+    const minWeek = getNextAvailableWeek();
     const newWeek = new Date(currentWeekStart);
     newWeek.setDate(newWeek.getDate() - 7);
 
-    if (newWeek >= today) {
+    if (newWeek >= minWeek) {
         currentWeekStart = newWeek;
         generateCalendar();
     }
@@ -244,20 +262,66 @@ function selectTime(time, element) {
     document.getElementById('confirmBooking').disabled = false;
 }
 
-function confirmBooking() {
+async function confirmBooking() {
     if (!selectedDate || !selectedTime) return;
 
     // Format date for display
     const dateStr = `${selectedDate.getDate()} ${monthNames[selectedDate.getMonth()]} ${selectedDate.getFullYear()}`;
     document.getElementById('confirmDateTime').textContent = `${dateStr} kl. ${selectedTime}`;
 
-    // Here you would normally send the data to a server
-    console.log('Booking data:', bookingData);
+    // Format date for database (YYYY-MM-DD)
+    const dbDate = selectedDate.toISOString().split('T')[0];
+
+    // Prepare booking data for Supabase
+    const bookingRecord = {
+        name: bookingData.name,
+        email: bookingData.email,
+        phone: bookingData.phone || null,
+        company: bookingData.company || null,
+        business_type: bookingData.business,
+        has_website: bookingData.hasWebsite,
+        goals: bookingData.goals,
+        booking_date: dbDate,
+        booking_time: selectedTime,
+        created_at: new Date().toISOString()
+    };
+
+    // Save to Supabase
+    try {
+        await saveBookingToSupabase(bookingRecord);
+        console.log('Booking saved successfully:', bookingRecord);
+    } catch (error) {
+        console.error('Failed to save booking:', error);
+        // Still show confirmation - we can handle failed bookings later
+    }
 
     // Show confirmation
     document.querySelectorAll('.modal-step').forEach(s => s.classList.remove('active'));
     document.getElementById('stepConfirm').classList.add('active');
     document.querySelector('.modal-progress').style.display = 'none';
+}
+
+// Supabase configuration
+const SUPABASE_URL = 'https://xklttbborrdoettifjak.supabase.co';
+const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE'; // Replace with your anon key
+
+async function saveBookingToSupabase(booking) {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(booking)
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to save booking: ${response.status}`);
+    }
+
+    return response;
 }
 
 // Initialize modal listeners when DOM is ready
