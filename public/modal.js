@@ -44,17 +44,21 @@ function openModal() {
 function closeModal() {
     document.getElementById('bookingModal').classList.remove('active');
     document.body.style.overflow = '';
-    // Reset form
-    currentStep = 1;
-    bookingData = { business: '', hasWebsite: '', goals: [], name: '', email: '', phone: '', company: '', date: null, time: '' };
-    selectedDate = null;
-    selectedTime = null;
-    document.querySelectorAll('.option-card, .option-card-wide').forEach(c => c.classList.remove('selected'));
-    document.querySelectorAll('.checkbox-card input').forEach(c => c.checked = false);
-    const form = document.getElementById('contactForm');
-    if (form) form.reset();
-    const progress = document.querySelector('.modal-progress');
-    if (progress) progress.style.display = '';
+    // Reset after fade-out animation completes
+    setTimeout(() => {
+        currentStep = 1;
+        bookingData = { business: '', hasWebsite: '', goals: [], name: '', email: '', phone: '', company: '', date: null, time: '' };
+        selectedDate = null;
+        selectedTime = null;
+        document.querySelectorAll('.option-card, .option-card-wide').forEach(c => c.classList.remove('selected'));
+        document.querySelectorAll('.checkbox-card input').forEach(c => c.checked = false);
+        const form = document.getElementById('contactForm');
+        if (form) form.reset();
+        const progress = document.querySelector('.modal-progress');
+        if (progress) progress.style.display = '';
+        showStep(1);
+        updateProgress();
+    }, 350);
 }
 
 function updateProgress() {
