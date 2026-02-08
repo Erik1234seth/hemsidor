@@ -1,0 +1,8 @@
+{
+  "name": "hemsidor",
+  "version": "1.0.0",
+  "description": "Vi bygger hemsidor åt dig",
+  "scripts": {
+    "start": "npx serve public"
+  }
+}
