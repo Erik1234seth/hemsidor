@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Vi bygger hemsidor åt dig",
   "scripts": {
+    "dev": "npx serve public",
     "start": "npx serve public"
   }
 }
