@@ -218,10 +218,10 @@ function selectDate(date, element) {
     document.getElementById('confirmBooking').disabled = true;
 }
 
-function generateTimeSlots() {
+async function generateTimeSlots() {
     const container = document.getElementById('timeSlots');
     if (!container) return;
-    container.innerHTML = '';
+    container.innerHTML = '<p class="time-slots-placeholder">Laddar tider...</p>';
 
     const times = [];
     for (let hour = 8; hour <= 17; hour++) {
@@ -231,12 +231,25 @@ function generateTimeSlots() {
         }
     }
 
-    // Simulate some random unavailable slots
+    // Fetch booked times from Supabase for selected date
     const unavailable = new Set();
-    for (let i = 0; i < 4; i++) {
-        unavailable.add(times[Math.floor(Math.random() * times.length)]);
+    if (selectedDate) {
+        const dateStr = selectedDate.toISOString().split('T')[0];
+        try {
+            const res = await fetch(`${SUPABASE_URL}/rest/v1/bookings?booking_date=eq.${dateStr}&select=booking_time`, {
+                headers: {
+                    'apikey': SUPABASE_ANON_KEY,
+                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                }
+            });
+            const booked = await res.json();
+            booked.forEach(b => unavailable.add(b.booking_time));
+        } catch (err) {
+            console.error('Failed to fetch booked times:', err);
+        }
     }
 
+    container.innerHTML = '';
     times.forEach(time => {
         const btn = document.createElement('button');
         btn.className = 'time-slot';
@@ -363,3 +376,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'Escape') closeModal();
     });
 });
+
+// ========== MOBILE MENU ==========
+
+function toggleMobileMenu() {
+    const nav = document.querySelector('.nav-links');
+    const hamburger = document.querySelector('.hamburger');
+    nav.classList.toggle('open');
+    hamburger.classList.toggle('active');
+}
