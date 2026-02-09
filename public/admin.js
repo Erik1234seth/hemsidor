@@ -241,12 +241,70 @@ function switchView(view) {
         document.getElementById('listView').classList.add('active');
         document.getElementById('viewTitle').textContent = 'Bokningar';
         document.getElementById('viewSubtitle').textContent = 'Alla inkomna bokningar';
-    } else {
+    } else if (view === 'calendar') {
         document.getElementById('calendarView').classList.add('active');
         document.getElementById('viewTitle').textContent = 'Kalender';
         document.getElementById('viewSubtitle').textContent = 'Veckovis översikt av ditt schema';
         renderAdminCalendar();
+    } else if (view === 'revenue') {
+        document.getElementById('revenueView').classList.add('active');
+        document.getElementById('viewTitle').textContent = 'Intäkter';
+        document.getElementById('viewSubtitle').textContent = 'Avklarade beställningar — 2 999 kr/år per kund';
+        renderRevenue();
     }
+}
+
+// ========== REVENUE VIEW ==========
+
+const PRICE_PER_YEAR = 2999;
+
+function renderRevenue() {
+    const completed = bookings.filter(b => b.status === 'completed');
+    const totalYearly = completed.length * PRICE_PER_YEAR;
+    const totalMonthly = Math.round(totalYearly / 12);
+
+    document.getElementById('revenueSummary').innerHTML = `
+        <div class="revenue-cards">
+            <div class="revenue-card main">
+                <span class="revenue-card-label">Årlig intäkt</span>
+                <span class="revenue-card-amount">${totalYearly.toLocaleString('sv-SE')} kr</span>
+                <span class="revenue-card-sub">${completed.length} aktiva kunder &times; 2 999 kr/år</span>
+            </div>
+            <div class="revenue-card">
+                <span class="revenue-card-label">Månadsintäkt</span>
+                <span class="revenue-card-amount">${totalMonthly.toLocaleString('sv-SE')} kr</span>
+                <span class="revenue-card-sub">Genomsnitt per månad</span>
+            </div>
+            <div class="revenue-card">
+                <span class="revenue-card-label">Aktiva kunder</span>
+                <span class="revenue-card-amount">${completed.length}</span>
+                <span class="revenue-card-sub">Avklarade beställningar</span>
+            </div>
+        </div>
+    `;
+
+    const tbody = document.getElementById('revenueTableBody');
+    const empty = document.getElementById('revenueEmpty');
+
+    if (completed.length === 0) {
+        tbody.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+    }
+
+    empty.classList.add('hidden');
+    tbody.innerHTML = completed.map(b => `
+        <tr onclick="openDetail('${b.id}')">
+            <td>
+                <span class="table-name">${escapeHtml(b.name)}</span>
+                <span class="table-email">${escapeHtml(b.email)}</span>
+            </td>
+            <td>${escapeHtml(b.company || '—')}</td>
+            <td>${getBusinessLabel(b.business_type)}</td>
+            <td>${formatDate(b.booking_date)}</td>
+            <td><strong>${PRICE_PER_YEAR.toLocaleString('sv-SE')} kr</strong></td>
+        </tr>
+    `).join('');
 }
 
 // ========== DETAIL MODAL ==========

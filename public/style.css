@@ -2973,6 +2973,57 @@ footer {
     border-color: var(--text-muted);
 }
 
+/* Revenue View */
+.revenue-cards {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.revenue-card {
+    background: white;
+    padding: 24px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.revenue-card.main {
+    background: var(--primary);
+    color: white;
+    border: none;
+}
+
+.revenue-card-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 0.7;
+    margin-bottom: 8px;
+}
+
+.revenue-card.main .revenue-card-label {
+    opacity: 0.85;
+}
+
+.revenue-card-amount {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.revenue-card-sub {
+    display: block;
+    font-size: 0.8rem;
+    margin-top: 8px;
+    opacity: 0.6;
+}
+
+.revenue-card.main .revenue-card-sub {
+    opacity: 0.75;
+}
+
 .hidden { display: none !important; }
 
 /* Admin Responsive */
@@ -2999,5 +3050,8 @@ footer {
     .admin-table th:nth-child(4),
     .admin-table td:nth-child(4) {
         display: none;
+    }
+    .revenue-cards {
+        grid-template-columns: 1fr;
     }
 }

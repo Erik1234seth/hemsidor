@@ -45,6 +45,10 @@
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="15" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7h16M6 1v4M14 1v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                     Kalender
                 </button>
+                <button class="admin-nav-btn" data-view="revenue" onclick="switchView('revenue')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 1v18M6 5h5.5a2.5 2.5 0 0 1 0 5H6M6 10h6.5a2.5 2.5 0 0 1 0 5H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Intäkter
+                </button>
             </nav>
             <button class="admin-logout-btn" onclick="handleLogout()">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 17H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h3M13 14l4-4-4-4M17 10H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -112,6 +116,30 @@
                     </button>
                 </div>
                 <div class="admin-calendar-grid" id="adminCalendarGrid"></div>
+            </div>
+
+            <!-- Revenue View -->
+            <div class="admin-view" id="revenueView">
+                <div class="revenue-summary" id="revenueSummary"></div>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Kund</th>
+                                <th>Företag</th>
+                                <th>Typ</th>
+                                <th>Avklarad</th>
+                                <th>Årlig intäkt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="revenueTableBody">
+                        </tbody>
+                    </table>
+                    <div class="admin-empty hidden" id="revenueEmpty">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 4v40M14 12h13a6 6 0 0 1 0 12H14M14 24h15a6 6 0 0 1 0 12H14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <p>Inga avklarade beställningar ännu</p>
+                    </div>
+                </div>
             </div>
         </div>
 
