@@ -342,8 +342,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Auto-open modal on page load
-    openModal();
+    // Auto-open modal only on first visit (per session)
+    if (!sessionStorage.getItem('modalShown')) {
+        openModal();
+        sessionStorage.setItem('modalShown', 'true');
+    }
 
     // Close on overlay click
     const modal = document.getElementById('bookingModal');

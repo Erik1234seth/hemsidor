@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Webbyrå</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logga.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="admin-login" id="loginScreen">
+        <div class="admin-login-card">
+            <img src="logga.png" alt="Webbyrå" class="admin-login-logo">
+            <h1>Admin</h1>
+            <p>Logga in för att hantera bokningar</p>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="admin-password">Lösenord</label>
+                    <input type="password" id="admin-password" placeholder="Ange lösenord" required autofocus>
+                </div>
+                <p class="admin-error" id="loginError"></p>
+                <button type="submit" class="btn btn-primary admin-login-btn">Logga in</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="admin-dashboard hidden" id="dashboard">
+        <div class="admin-sidebar">
+            <div class="admin-sidebar-logo">
+                <img src="logga.png" alt="Webbyrå" class="logo-mark">
+                <span>Webbyrå Admin</span>
+            </div>
+            <nav class="admin-nav">
+                <button class="admin-nav-btn active" data-view="list" onclick="switchView('list')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 4h14M3 8h14M3 12h14M3 16h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    Bokningar
+                </button>
+                <button class="admin-nav-btn" data-view="calendar" onclick="switchView('calendar')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="15" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7h16M6 1v4M14 1v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    Kalender
+                </button>
+            </nav>
+            <button class="admin-logout-btn" onclick="handleLogout()">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 17H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h3M13 14l4-4-4-4M17 10H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Logga ut
+            </button>
+        </div>
+
+        <div class="admin-main">
+            <!-- Header -->
+            <div class="admin-header">
+                <div>
+                    <h1 id="viewTitle">Bokningar</h1>
+                    <p class="admin-subtitle" id="viewSubtitle">Alla inkomna bokningar</p>
+                </div>
+                <div class="admin-header-actions">
+                    <div class="admin-filter">
+                        <select id="statusFilter" onchange="filterBookings()">
+                            <option value="all">Alla statusar</option>
+                            <option value="pending">Väntande</option>
+                            <option value="confirmed">Bekräftade</option>
+                            <option value="completed">Avklarade</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-secondary admin-refresh" onclick="loadBookings()">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 8A6 6 0 1 1 8 2c1.6 0 3 .6 4 1.6L14 1v5h-5l2-2A4 4 0 1 0 12 8h2z" fill="currentColor"/></svg>
+                        Uppdatera
+                    </button>
+                </div>
+            </div>
+
+            <!-- List View -->
+            <div class="admin-view active" id="listView">
+                <div class="admin-stats" id="adminStats"></div>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Datum & tid</th>
+                                <th>Namn</th>
+                                <th>Företag</th>
+                                <th>Typ</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTableBody">
+                        </tbody>
+                    </table>
+                    <div class="admin-empty hidden" id="emptyState">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="36" height="28" rx="4" stroke="currentColor" stroke-width="2"/><path d="M6 18h36" stroke="currentColor" stroke-width="2"/><circle cx="14" cy="14" r="1.5" fill="currentColor"/><circle cx="19" cy="14" r="1.5" fill="currentColor"/><circle cx="24" cy="14" r="1.5" fill="currentColor"/></svg>
+                        <p>Inga bokningar hittades</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar View -->
+            <div class="admin-view" id="calendarView">
+                <div class="admin-calendar-header">
+                    <button class="calendar-nav" onclick="adminPrevWeek()">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 15l-5-5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <h2 id="adminCalendarTitle">Vecka</h2>
+                    <button class="calendar-nav" onclick="adminNextWeek()">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 15l5-5-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </div>
+                <div class="admin-calendar-grid" id="adminCalendarGrid"></div>
+            </div>
+        </div>
+
+        <!-- Booking Detail Modal -->
+        <div class="admin-modal-overlay hidden" id="detailModal">
+            <div class="admin-modal">
+                <button class="modal-close" onclick="closeDetail()">&times;</button>
+                <h2>Bokningsdetaljer</h2>
+                <div class="admin-detail-content" id="detailContent"></div>
+                <div class="admin-detail-actions" id="detailActions"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
