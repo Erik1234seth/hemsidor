@@ -308,6 +308,22 @@ async function confirmBooking() {
     try {
         await saveBookingToSupabase(bookingRecord);
         console.log('Booking saved successfully:', bookingRecord);
+
+        // Send confirmation emails via Edge Function
+        try {
+            await fetch(`${SUPABASE_URL}/functions/v1/send-booking-email`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                },
+                body: JSON.stringify(bookingRecord)
+            });
+            console.log('Confirmation emails sent');
+        } catch (emailError) {
+            console.error('Failed to send emails:', emailError);
+            // Continue anyway - booking is saved
+        }
     } catch (error) {
         console.error('Failed to save booking:', error);
         // Still show confirmation - we can handle failed bookings later
