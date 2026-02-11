@@ -90,9 +90,10 @@ function prevStep() {
     }
 }
 
-// Quick select from top 5 popular options
+// Quick select from top popular options
 function selectBusinessQuick(element, value, label) {
     document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('.business-item').forEach(c => c.classList.remove('selected'));
     element.classList.add('selected');
 
     bookingData.business = value;
@@ -101,21 +102,51 @@ function selectBusinessQuick(element, value, label) {
     setTimeout(() => nextStep(), 300);
 }
 
-// Show all businesses (expand list)
-function showAllBusinesses() {
-    const allBusinesses = document.getElementById('all-businesses');
-    const popularOptions = document.querySelector('.popular-options');
+// Handle "Annat" button click
+function handleAnnatClick() {
+    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    document.querySelector('.annat-card').classList.add('selected');
 
-    if (allBusinesses.classList.contains('hidden')) {
-        allBusinesses.classList.remove('hidden');
-        popularOptions.style.display = 'none';
+    // Remove existing custom input if any
+    const existingInput = document.getElementById('custom-business-input');
+    if (existingInput) existingInput.remove();
 
-        // Focus search field
-        setTimeout(() => {
-            const searchInput = document.getElementById('business-search');
-            if (searchInput) searchInput.focus();
-        }, 100);
+    // Create custom input field
+    const inputHTML = `
+        <div id="custom-business-input" style="margin-top: 16px; padding: 16px; background: #f3f4f6; border-radius: 8px;">
+            <label for="custom-business" style="display: block; margin-bottom: 8px; font-weight: 500; color: #374151;">Beskriv din bransch</label>
+            <input type="text" id="custom-business" placeholder="T.ex. Kiropraktor, Hudvård, Arkitekt..." style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px;">
+            <button onclick="submitCustomBusiness()" class="btn btn-primary" style="margin-top: 12px; width: 100%;">Fortsätt</button>
+        </div>
+    `;
+    document.querySelector('.popular-options').insertAdjacentHTML('afterend', inputHTML);
+
+    // Focus the input
+    setTimeout(() => {
+        const input = document.getElementById('custom-business');
+        if (input) input.focus();
+    }, 100);
+}
+
+// Submit custom business
+function submitCustomBusiness() {
+    const input = document.getElementById('custom-business');
+    if (!input) return;
+
+    const value = input.value.trim();
+    if (!value) {
+        alert('Vänligen beskriv din bransch');
+        input.focus();
+        return;
     }
+
+    bookingData.business = 'annat: ' + value;
+    bookingData.businessLabel = 'Annat: ' + value;
+
+    const customInput = document.getElementById('custom-business-input');
+    if (customInput) customInput.remove();
+
+    nextStep();
 }
 
 // Select business from searchable list
