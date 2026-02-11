@@ -763,9 +763,14 @@
                 <h2>Vilken typ av verksamhet har du?</h2>
                 <p class="modal-desc">Välj den bransch som passar bäst för din verksamhet.</p>
 
-                <!-- Top Popular Options with Annat first -->
+                <!-- Search Field (at the top) -->
+                <div class="business-search-box">
+                    <input type="text" id="business-search" placeholder="Sök din bransch..." onkeyup="filterBusinesses()">
+                </div>
+
+                <!-- Top 6 Options -->
                 <div class="popular-options">
-                    <button class="option-card annat-card" onclick="handleAnnatClick()">
+                    <button class="option-card" onclick="handleAnnatClick()">
                         <div class="option-icon">
                             <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                                 <circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="2"/>
@@ -817,77 +822,55 @@
                     </button>
                 </div>
 
-                <!-- Search and All Options (Always visible) -->
-                <div id="all-businesses" class="all-businesses">
-                    <div class="business-search-box">
-                        <input type="text" id="business-search" placeholder="Sök bransch..." onkeyup="filterBusinesses()" style="width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px;">
-                    </div>
+                <!-- Expand Button -->
+                <button class="expand-businesses-btn" onclick="toggleBusinessList()" id="expandBtn">
+                    <span>Visa fler alternativ</span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <!-- All Businesses (Hidden by default, flat list) -->
+                <div id="all-businesses" class="all-businesses hidden">
                     <div class="business-list" id="business-list">
-                        <div class="business-category">
-                            <h4>Hälsa & Vård</h4>
-                            <button class="business-item" data-value="frisor" onclick="selectBusinessFromList(this, 'frisor', 'Frisör & Salong')">Frisör & Salong</button>
-                            <button class="business-item" data-value="skonhetsvard" onclick="selectBusinessFromList(this, 'skonhetsvard', 'Skönhetsvård & Spa')">Skönhetsvård & Spa</button>
-                            <button class="business-item" data-value="nagelstudio" onclick="selectBusinessFromList(this, 'nagelstudio', 'Nagelstudio')">Nagelstudio</button>
-                            <button class="business-item" data-value="massage" onclick="selectBusinessFromList(this, 'massage', 'Massage & Wellness')">Massage & Wellness</button>
-                            <button class="business-item" data-value="tandlakare" onclick="selectBusinessFromList(this, 'tandlakare', 'Tandläkare')">Tandläkare</button>
-                            <button class="business-item" data-value="veterinar" onclick="selectBusinessFromList(this, 'veterinar', 'Veterinär')">Veterinär</button>
-                            <button class="business-item" data-value="fysioterapeut" onclick="selectBusinessFromList(this, 'fysioterapeut', 'Fysioterapeut')">Fysioterapeut</button>
-                        </div>
-                        <div class="business-category">
-                            <h4>Mat & Dryck</h4>
-                            <button class="business-item" data-value="restaurang" onclick="selectBusinessFromList(this, 'restaurang', 'Restaurang & Café')">Restaurang & Café</button>
-                            <button class="business-item" data-value="catering" onclick="selectBusinessFromList(this, 'catering', 'Catering')">Catering</button>
-                            <button class="business-item" data-value="bageri" onclick="selectBusinessFromList(this, 'bageri', 'Bageri & Konditori')">Bageri & Konditori</button>
-                        </div>
-                        <div class="business-category">
-                            <h4>Bygg & Hantverk</h4>
-                            <button class="business-item" data-value="hantverkare" onclick="selectBusinessFromList(this, 'hantverkare', 'Byggföretag')">Byggföretag</button>
-                            <button class="business-item" data-value="snickare" onclick="selectBusinessFromList(this, 'snickare', 'Snickare')">Snickare</button>
-                            <button class="business-item" data-value="elektriker" onclick="selectBusinessFromList(this, 'elektriker', 'Elektriker')">Elektriker</button>
-                            <button class="business-item" data-value="ror" onclick="selectBusinessFromList(this, 'ror', 'Rörmokare & VVS')">Rörmokare & VVS</button>
-                        </div>
-                        <div class="business-category">
-                            <h4>Sport & Träning</h4>
-                            <button class="business-item" data-value="pt" onclick="selectBusinessFromList(this, 'pt', 'Personlig Tränare')">Personlig Tränare (PT)</button>
-                            <button class="business-item" data-value="gym" onclick="selectBusinessFromList(this, 'gym', 'Gym')">Gym & Träningsanläggning</button>
-                            <button class="business-item" data-value="yoga" onclick="selectBusinessFromList(this, 'yoga', 'Yoga & Pilates')">Yoga & Pilates</button>
-                            <button class="business-item" data-value="sport" onclick="selectBusinessFromList(this, 'sport', 'Sport & Fritid')">Sport & Fritidsverksamhet</button>
-                        </div>
-                        <div class="business-category">
-                            <h4>Kreativt & Design</h4>
-                            <button class="business-item" data-value="designer" onclick="selectBusinessFromList(this, 'designer', 'Grafisk Designer')">Grafisk Designer</button>
-                            <button class="business-item" data-value="fotograf" onclick="selectBusinessFromList(this, 'fotograf', 'Fotograf')">Fotograf</button>
-                            <button class="business-item" data-value="scenkonst" onclick="selectBusinessFromList(this, 'scenkonst', 'Scenkonst & Teater')">Scenkonst & Teater</button>
-                            <button class="business-item" data-value="konsult" onclick="selectBusinessFromList(this, 'konsult', 'Konsult')">Konsult</button>
-                        </div>
-                        <div class="business-category">
-                            <h4>Handel & Service</h4>
-                            <button class="business-item" data-value="butik" onclick="selectBusinessFromList(this, 'butik', 'Butik & E-handel')">Butik & E-handel</button>
-                            <button class="business-item" data-value="fastighet" onclick="selectBusinessFromList(this, 'fastighet', 'Fastighetsmäklare')">Fastighetsmäklare</button>
-                            <button class="business-item" data-value="redovisning" onclick="selectBusinessFromList(this, 'redovisning', 'Redovisning')">Redovisning & Bokföring</button>
-                            <button class="business-item" data-value="advokat" onclick="selectBusinessFromList(this, 'advokat', 'Advokatbyrå')">Advokatbyrå</button>
-                        </div>
-                        <div class="business-category">
-                            <h4>Övrigt</h4>
-                            <button class="business-item" data-value="annat" onclick="selectBusinessFromList(this, 'annat', 'Annat')">Annat</button>
-                        </div>
+                        <button class="business-item" data-value="skonhetsvard" onclick="selectBusinessFromList(this, 'skonhetsvard', 'Skönhetsvård & Spa')">Skönhetsvård & Spa</button>
+                        <button class="business-item" data-value="nagelstudio" onclick="selectBusinessFromList(this, 'nagelstudio', 'Nagelstudio')">Nagelstudio</button>
+                        <button class="business-item" data-value="massage" onclick="selectBusinessFromList(this, 'massage', 'Massage & Wellness')">Massage & Wellness</button>
+                        <button class="business-item" data-value="tandlakare" onclick="selectBusinessFromList(this, 'tandlakare', 'Tandläkare')">Tandläkare</button>
+                        <button class="business-item" data-value="veterinar" onclick="selectBusinessFromList(this, 'veterinar', 'Veterinär')">Veterinär</button>
+                        <button class="business-item" data-value="fysioterapeut" onclick="selectBusinessFromList(this, 'fysioterapeut', 'Fysioterapeut')">Fysioterapeut</button>
+                        <button class="business-item" data-value="catering" onclick="selectBusinessFromList(this, 'catering', 'Catering')">Catering</button>
+                        <button class="business-item" data-value="bageri" onclick="selectBusinessFromList(this, 'bageri', 'Bageri & Konditori')">Bageri & Konditori</button>
+                        <button class="business-item" data-value="snickare" onclick="selectBusinessFromList(this, 'snickare', 'Snickare')">Snickare</button>
+                        <button class="business-item" data-value="elektriker" onclick="selectBusinessFromList(this, 'elektriker', 'Elektriker')">Elektriker</button>
+                        <button class="business-item" data-value="ror" onclick="selectBusinessFromList(this, 'ror', 'Rörmokare & VVS')">Rörmokare & VVS</button>
+                        <button class="business-item" data-value="gym" onclick="selectBusinessFromList(this, 'gym', 'Gym & Träningsanläggning')">Gym & Träningsanläggning</button>
+                        <button class="business-item" data-value="yoga" onclick="selectBusinessFromList(this, 'yoga', 'Yoga & Pilates')">Yoga & Pilates</button>
+                        <button class="business-item" data-value="sport" onclick="selectBusinessFromList(this, 'sport', 'Sport & Fritidsverksamhet')">Sport & Fritidsverksamhet</button>
+                        <button class="business-item" data-value="fotograf" onclick="selectBusinessFromList(this, 'fotograf', 'Fotograf')">Fotograf</button>
+                        <button class="business-item" data-value="scenkonst" onclick="selectBusinessFromList(this, 'scenkonst', 'Scenkonst & Teater')">Scenkonst & Teater</button>
+                        <button class="business-item" data-value="konsult" onclick="selectBusinessFromList(this, 'konsult', 'Konsult')">Konsult</button>
+                        <button class="business-item" data-value="butik" onclick="selectBusinessFromList(this, 'butik', 'Butik & E-handel')">Butik & E-handel</button>
+                        <button class="business-item" data-value="fastighet" onclick="selectBusinessFromList(this, 'fastighet', 'Fastighetsmäklare')">Fastighetsmäklare</button>
+                        <button class="business-item" data-value="redovisning" onclick="selectBusinessFromList(this, 'redovisning', 'Redovisning & Bokföring')">Redovisning & Bokföring</button>
+                        <button class="business-item" data-value="advokat" onclick="selectBusinessFromList(this, 'advokat', 'Advokatbyrå')">Advokatbyrå</button>
                     </div>
                 </div>
 
                 <style>
-                    .popular-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; margin-bottom: 24px; }
-                    .annat-card { background: #fef3c7; border-color: #f59e0b !important; }
-                    .annat-card:hover { background: #fde68a; }
-                    .annat-card.selected { background: #f59e0b; color: white; }
-                    .all-businesses { margin-top: 8px; }
                     .business-search-box { margin-bottom: 16px; }
-                    .business-list { max-height: 350px; overflow-y: auto; border: 2px solid #e5e7eb; border-radius: 8px; padding: 16px; background: #fafafa; }
-                    .business-category { margin-bottom: 16px; }
-                    .business-category:last-child { margin-bottom: 0; }
-                    .business-category h4 { font-size: 13px; font-weight: 600; color: #6b7280; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-                    .business-item { display: block; width: 100%; text-align: left; padding: 10px 12px; border: none; background: white; border-radius: 6px; cursor: pointer; font-size: 15px; margin-bottom: 4px; transition: all 0.2s; }
+                    .business-search-box input { width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px; }
+                    .popular-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+                    .expand-businesses-btn { width: 100%; padding: 12px; border: 2px solid #e5e7eb; background: white; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; font-weight: 500; color: #374151; transition: all 0.2s; margin-bottom: 16px; }
+                    .expand-businesses-btn:hover { background: #f9fafb; border-color: #d1d5db; }
+                    .expand-businesses-btn svg { transition: transform 0.2s; }
+                    .expand-businesses-btn.expanded svg { transform: rotate(180deg); }
+                    .all-businesses { margin-top: 0; }
+                    .all-businesses.hidden { display: none; }
+                    .business-list { max-height: 350px; overflow-y: auto; border: 2px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #fafafa; display: grid; grid-template-columns: 1fr; gap: 6px; }
+                    .business-item { display: block; width: 100%; text-align: left; padding: 10px 12px; border: none; background: white; border-radius: 6px; cursor: pointer; font-size: 15px; transition: all 0.2s; }
                     .business-item:hover { background: #e5e7eb; }
-                    .business-item.selected { background: #2563eb; color: white; }
+                    .business-item.selected { background: #4f46e5; color: white; }
                     @media (max-width: 640px) { .popular-options { grid-template-columns: repeat(2, 1fr); } }
                 </style>
             </div>

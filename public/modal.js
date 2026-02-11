@@ -92,6 +92,10 @@ function prevStep() {
 
 // Quick select from top popular options
 function selectBusinessQuick(element, value, label) {
+    // Remove existing custom input if any
+    const existingInput = document.getElementById('custom-business-input');
+    if (existingInput) existingInput.remove();
+
     document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
     document.querySelectorAll('.business-item').forEach(c => c.classList.remove('selected'));
     element.classList.add('selected');
@@ -105,7 +109,11 @@ function selectBusinessQuick(element, value, label) {
 // Handle "Annat" button click
 function handleAnnatClick() {
     document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-    document.querySelector('.annat-card').classList.add('selected');
+    document.querySelectorAll('.business-item').forEach(c => c.classList.remove('selected'));
+
+    // Find the Annat button and mark as selected
+    const annatButton = event.currentTarget;
+    annatButton.classList.add('selected');
 
     // Remove existing custom input if any
     const existingInput = document.getElementById('custom-business-input');
@@ -119,7 +127,7 @@ function handleAnnatClick() {
             <button onclick="submitCustomBusiness()" class="btn btn-primary" style="margin-top: 12px; width: 100%;">Fortsätt</button>
         </div>
     `;
-    document.querySelector('.popular-options').insertAdjacentHTML('afterend', inputHTML);
+    document.getElementById('expandBtn').insertAdjacentHTML('afterend', inputHTML);
 
     // Focus the input
     setTimeout(() => {
@@ -155,27 +163,9 @@ function selectBusinessFromList(element, value, label) {
     const existingInput = document.getElementById('custom-business-input');
     if (existingInput) existingInput.remove();
 
-    // If "annat" is selected, show custom input
-    if (value === 'annat') {
-        const inputHTML = `
-            <div id="custom-business-input" style="margin-top: 16px;">
-                <label for="custom-business" style="display: block; margin-bottom: 8px; font-weight: 500; color: #374151;">Beskriv din bransch</label>
-                <input type="text" id="custom-business" placeholder="T.ex. Kiropraktor, Hudvård, Arkitekt..." style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px;">
-                <button onclick="submitCustomBusinessFromList()" class="btn btn-primary" style="margin-top: 12px; width: 100%;">Fortsätt</button>
-            </div>
-        `;
-        document.getElementById('all-businesses').insertAdjacentHTML('beforeend', inputHTML);
-
-        // Focus the input
-        setTimeout(() => {
-            const input = document.getElementById('custom-business');
-            if (input) input.focus();
-        }, 100);
-        return;
-    }
-
     // Highlight selected item
     document.querySelectorAll('.business-item').forEach(item => item.classList.remove('selected'));
+    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
     element.classList.add('selected');
 
     bookingData.business = value;
@@ -184,53 +174,45 @@ function selectBusinessFromList(element, value, label) {
     setTimeout(() => nextStep(), 300);
 }
 
-// Submit custom business from list
-function submitCustomBusinessFromList() {
-    const input = document.getElementById('custom-business');
-    if (!input) return;
+// Toggle business list expansion
+function toggleBusinessList() {
+    const allBusinesses = document.getElementById('all-businesses');
+    const expandBtn = document.getElementById('expandBtn');
 
-    const value = input.value.trim();
-    if (!value) {
-        alert('Vänligen beskriv din bransch');
-        input.focus();
-        return;
+    allBusinesses.classList.toggle('hidden');
+    expandBtn.classList.toggle('expanded');
+
+    if (!allBusinesses.classList.contains('hidden')) {
+        expandBtn.querySelector('span').textContent = 'Visa färre alternativ';
+    } else {
+        expandBtn.querySelector('span').textContent = 'Visa fler alternativ';
     }
-
-    bookingData.business = 'annat: ' + value;
-    bookingData.businessLabel = 'Annat: ' + value;
-
-    const customInput = document.getElementById('custom-business-input');
-    if (customInput) customInput.remove();
-
-    nextStep();
 }
 
-// Filter businesses by search
+// Filter businesses by search (flat list, no sections)
 function filterBusinesses() {
     const searchInput = document.getElementById('business-search');
     const filter = searchInput.value.toLowerCase();
-    const categories = document.querySelectorAll('.business-category');
+    const items = document.querySelectorAll('.business-item');
 
-    categories.forEach(category => {
-        const items = category.querySelectorAll('.business-item');
-        let hasVisibleItems = false;
-
-        items.forEach(item => {
-            const text = item.textContent.toLowerCase();
-            if (text.includes(filter)) {
-                item.style.display = 'block';
-                hasVisibleItems = true;
-            } else {
-                item.style.display = 'none';
-            }
-        });
-
-        // Hide category header if no items visible
-        const header = category.querySelector('h4');
-        if (header) {
-            header.style.display = hasVisibleItems ? 'block' : 'none';
+    // If user is typing, auto-expand the list
+    if (filter.length > 0) {
+        const allBusinesses = document.getElementById('all-businesses');
+        const expandBtn = document.getElementById('expandBtn');
+        if (allBusinesses.classList.contains('hidden')) {
+            allBusinesses.classList.remove('hidden');
+            expandBtn.classList.add('expanded');
+            expandBtn.querySelector('span').textContent = 'Visa färre alternativ';
         }
-        category.style.display = hasVisibleItems ? 'block' : 'none';
+    }
+
+    items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(filter)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
     });
 }
 
