@@ -90,61 +90,75 @@ function prevStep() {
     }
 }
 
-function selectOption(element, field) {
-    const parent = element.parentElement;
-    parent.querySelectorAll('.option-card, .option-card-wide').forEach(c => c.classList.remove('selected'));
-    element.classList.add('selected');
+// Handle business dropdown selection
+function handleBusinessSelect() {
+    const select = document.getElementById('business-select');
+    const value = select.value;
 
-    // If "annat" is selected in business type, show custom input and DON'T proceed
-    if (field === 'business' && element.dataset.value === 'annat') {
-        // Remove existing input if any
-        const existingInput = document.getElementById('custom-business-input');
-        if (existingInput) existingInput.remove();
+    // Remove existing custom input if any
+    const existingInput = document.getElementById('custom-business-input');
+    if (existingInput) existingInput.remove();
 
-        // Create and insert custom input field
+    // If "annat" is selected, show custom input field
+    if (value === 'annat') {
         const inputHTML = `
             <div id="custom-business-input" style="margin-top: 20px;">
-                <label for="custom-business" style="display: block; margin-bottom: 8px; font-weight: 500; color: #374151;">Vilken bransch?</label>
-                <input type="text" id="custom-business" placeholder="T.ex. Tandläkare, PT, Hudvård..." style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 16px;">
-                <button onclick="submitCustomBusiness()" class="btn btn-primary" style="margin-top: 12px; width: 100%;">Fortsätt</button>
+                <label for="custom-business" style="display: block; margin-bottom: 8px; font-weight: 500; color: #374151;">Beskriv din bransch</label>
+                <input type="text" id="custom-business" placeholder="T.ex. Kiropraktor, Hudvård, Arkitekt..." style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px;">
             </div>
         `;
-        parent.insertAdjacentHTML('afterend', inputHTML);
+        select.parentElement.insertAdjacentHTML('afterend', inputHTML);
 
         // Focus the input field
         setTimeout(() => {
             const input = document.getElementById('custom-business');
             if (input) input.focus();
         }, 100);
+    }
+}
 
-        // IMPORTANT: Return here to NOT proceed to next step
+// Validate business selection before proceeding
+function validateBusinessSelect() {
+    const select = document.getElementById('business-select');
+    const value = select.value;
+
+    if (!value) {
+        alert('Vänligen välj en bransch');
+        select.focus();
         return;
     }
 
-    // For all other options, remove custom input if it exists and proceed
-    const customInput = document.getElementById('custom-business-input');
-    if (customInput) customInput.remove();
+    // If "annat" is selected, check custom input
+    if (value === 'annat') {
+        const customInput = document.getElementById('custom-business');
+        const customValue = customInput ? customInput.value.trim() : '';
+
+        if (!customValue) {
+            alert('Vänligen beskriv din bransch');
+            if (customInput) customInput.focus();
+            return;
+        }
+
+        bookingData.business = 'annat: ' + customValue;
+    } else {
+        bookingData.business = value;
+    }
+
+    // Remove custom input if it exists
+    const existingInput = document.getElementById('custom-business-input');
+    if (existingInput) existingInput.remove();
+
+    nextStep();
+}
+
+// Legacy function for card-based selection (keeping for other pages if needed)
+function selectOption(element, field) {
+    const parent = element.parentElement;
+    parent.querySelectorAll('.option-card, .option-card-wide').forEach(c => c.classList.remove('selected'));
+    element.classList.add('selected');
 
     bookingData[field] = element.dataset.value;
     setTimeout(() => nextStep(), 300);
-}
-
-function submitCustomBusiness() {
-    const input = document.getElementById('custom-business');
-    if (!input) return;
-
-    const value = input.value.trim();
-    if (!value) {
-        alert('Vänligen ange din bransch');
-        input.focus();
-        return;
-    }
-
-    bookingData.business = 'annat: ' + value;
-    const customInput = document.getElementById('custom-business-input');
-    if (customInput) customInput.remove();
-
-    nextStep();
 }
 
 function validateAndNext() {
