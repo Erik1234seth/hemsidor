@@ -518,14 +518,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Auto-open modal only on first visit (per session) and only on homepage
-    const isHomepage = window.location.pathname === '/' ||
-                       window.location.pathname.endsWith('index.html') ||
-                       window.location.pathname === '';
+    // Check for URL parameters to open modal with pre-selected business
+    const urlParams = new URLSearchParams(window.location.search);
+    const businessValue = urlParams.get('business');
+    const businessLabel = urlParams.get('label');
 
-    if (!sessionStorage.getItem('modalShown') && isHomepage) {
-        openModal();
-        sessionStorage.setItem('modalShown', 'true');
+    if (businessValue && businessLabel) {
+        // Open modal with pre-selected business from URL parameter
+        openModalWithBusiness(businessValue, decodeURIComponent(businessLabel));
+        // Clear the URL parameters without reloading
+        window.history.replaceState({}, '', window.location.pathname);
+    } else {
+        // Auto-open modal only on first visit (per session) and only on homepage
+        const isHomepage = window.location.pathname === '/' ||
+                           window.location.pathname.endsWith('index.html') ||
+                           window.location.pathname === '';
+
+        if (!sessionStorage.getItem('modalShown') && isHomepage) {
+            openModal();
+            sessionStorage.setItem('modalShown', 'true');
+        }
     }
 
     // Close on overlay click
