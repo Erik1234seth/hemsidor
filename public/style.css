@@ -1973,6 +1973,12 @@ footer {
     color: var(--primary);
 }
 
+.option-icon svg {
+    width: 32px;
+    height: 32px;
+    stroke-width: 2;
+}
+
 .option-card.selected .option-icon {
     background: var(--primary);
     color: white;
