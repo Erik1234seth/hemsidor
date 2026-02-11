@@ -51,6 +51,37 @@
             </div>
         </section>
 
+        <!-- Search Section -->
+        <section class="examples-search">
+            <div class="container">
+                <div class="search-box-wrapper">
+                    <input type="text" id="exampleSearch" placeholder="Sök efter bransch (t.ex. frisör, restaurang, bygg...)" onkeyup="filterExamples()">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="search-icon">
+                        <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12.5 12.5L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="popular-categories" id="popularCategories">
+                    <button class="category-tag active" data-category="alla" onclick="filterByCategory('alla')">Alla</button>
+                    <button class="category-tag" data-category="frisor" onclick="filterByCategory('frisor')">Frisör</button>
+                    <button class="category-tag" data-category="restaurang" onclick="filterByCategory('restaurang')">Restaurang</button>
+                    <button class="category-tag" data-category="hantverkare" onclick="filterByCategory('hantverkare')">Bygg</button>
+                    <button class="category-tag" data-category="pt" onclick="filterByCategory('pt')">PT</button>
+                    <button class="category-tag" data-category="designer" onclick="filterByCategory('designer')">Designer</button>
+                    <button class="category-tag" data-category="skonhetsvard" onclick="filterByCategory('skonhetsvard')">Skönhet</button>
+                    <button class="category-tag" data-category="veterinar" onclick="filterByCategory('veterinar')">Veterinär</button>
+                    <button class="category-tag" data-category="snickare" onclick="filterByCategory('snickare')">Snickare</button>
+                    <button class="category-tag" data-category="elektriker" onclick="filterByCategory('elektriker')">Elektriker</button>
+                    <button class="category-tag" data-category="rormokare" onclick="filterByCategory('rormokare')">Rörmokare</button>
+                    <button class="category-tag" data-category="fotograf" onclick="filterByCategory('fotograf')">Fotograf</button>
+                    <button class="category-tag" data-category="scenkonst" onclick="filterByCategory('scenkonst')">Scenkonst</button>
+                    <button class="category-tag" data-category="konsult" onclick="filterByCategory('konsult')">Konsult</button>
+                    <button class="category-tag" data-category="redovisning" onclick="filterByCategory('redovisning')">Redovisning</button>
+                    <button class="category-tag" data-category="advokat" onclick="filterByCategory('advokat')">Advokat</button>
+                </div>
+            </div>
+        </section>
+
         <!-- Examples Grid -->
         <section class="examples-page">
             <div class="container">
@@ -606,7 +637,7 @@
                                         <span class="service-name">Snickarkök</span>
                                         <span class="service-desc">Skräddarsytt</span>
                                     </div>
-                                    <span class="service-price-tag">från 120 000 kr</span>
+                                    <span class="service-price-tag">från 120.000 kr</span>
                                 </div>
                                 <div class="preview-service-item">
                                     <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=120&h=80&fit=crop" alt="Möbler">
@@ -614,7 +645,7 @@
                                         <span class="service-name">Handgjorda möbler</span>
                                         <span class="service-desc">Unika designmöbler</span>
                                     </div>
-                                    <span class="service-price-tag">från 15 000 kr</span>
+                                    <span class="service-price-tag">från 15.000 kr</span>
                                 </div>
                                 <div class="preview-service-item">
                                     <img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=120&h=80&fit=crop" alt="Trappor">
@@ -622,7 +653,7 @@
                                         <span class="service-name">Trappor & räcken</span>
                                         <span class="service-desc">Byggnadssnickeri</span>
                                     </div>
-                                    <span class="service-price-tag">från 80 000 kr</span>
+                                    <span class="service-price-tag">från 80.000 kr</span>
                                 </div>
                             </div>
                         </div>
@@ -676,7 +707,7 @@
                                         <span class="service-name">Elbesiktning</span>
                                         <span class="service-desc">Säker elanläggning</span>
                                     </div>
-                                    <span class="service-price-tag">från 2 500 kr</span>
+                                    <span class="service-price-tag">från 2.500 kr</span>
                                 </div>
                                 <div class="preview-service-item">
                                     <img src="https://images.unsplash.com/photo-1621905252472-495b050e5a0b?w=120&h=80&fit=crop" alt="Akutjour">
@@ -684,7 +715,7 @@
                                         <span class="service-name">Akutjour 24/7</span>
                                         <span class="service-desc">Alltid tillgänglig</span>
                                     </div>
-                                    <span class="service-price-tag">från 1 200 kr</span>
+                                    <span class="service-price-tag">från 1.200 kr</span>
                                 </div>
                             </div>
                         </div>
@@ -730,7 +761,7 @@
                                         <span class="service-name">Badrumsrenovering</span>
                                         <span class="service-desc">Totalentreprenad</span>
                                     </div>
-                                    <span class="service-price-tag">från 120 000 kr</span>
+                                    <span class="service-price-tag">från 120.000 kr</span>
                                 </div>
                                 <div class="preview-service-item">
                                     <img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=120&h=80&fit=crop" alt="Akut">
@@ -738,7 +769,7 @@
                                         <span class="service-name">Akut läckage</span>
                                         <span class="service-desc">Snabb utryckning</span>
                                     </div>
-                                    <span class="service-price-tag">från 1 500 kr</span>
+                                    <span class="service-price-tag">från 1.500 kr</span>
                                 </div>
                                 <div class="preview-service-item">
                                     <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=120&h=80&fit=crop" alt="Avlopp">
@@ -746,7 +777,7 @@
                                         <span class="service-name">Avloppsspolning</span>
                                         <span class="service-desc">Stopp & rensning</span>
                                     </div>
-                                    <span class="service-price-tag">från 1 800 kr</span>
+                                    <span class="service-price-tag">från 1.800 kr</span>
                                 </div>
                             </div>
                         </div>
@@ -892,7 +923,7 @@
                                         <span class="service-name">Löpande bokföring</span>
                                         <span class="service-desc">Månadsvis bokföring</span>
                                     </div>
-                                    <span class="service-price-tag">från 2 500 kr/mån</span>
+                                    <span class="service-price-tag">från 2.500 kr/mån</span>
                                 </div>
                                 <div class="preview-service-item">
                                     <img src="https://images.unsplash.com/photo-1554224311-beee460c201f?w=120&h=80&fit=crop" alt="Deklaration">
@@ -900,7 +931,7 @@
                                         <span class="service-name">Årsbokslut & deklaration</span>
                                         <span class="service-desc">Komplett årsredovisning</span>
                                     </div>
-                                    <span class="service-price-tag">från 8 000 kr</span>
+                                    <span class="service-price-tag">från 8.000 kr</span>
                                 </div>
                                 <div class="preview-service-item">
                                     <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=120&h=80&fit=crop" alt="Rådgivning">
@@ -908,7 +939,7 @@
                                         <span class="service-name">Ekonomisk rådgivning</span>
                                         <span class="service-desc">Strategi & optimering</span>
                                     </div>
-                                    <span class="service-price-tag">från 1 500 kr/tim</span>
+                                    <span class="service-price-tag">från 1.500 kr/tim</span>
                                 </div>
                             </div>
                         </div>
@@ -954,7 +985,7 @@
                                         <span class="service-name">Fastighetsrätt</span>
                                         <span class="service-desc">Köp, försäljning, tvister</span>
                                     </div>
-                                    <span class="service-price-tag">från 3 500 kr</span>
+                                    <span class="service-price-tag">från 3.500 kr</span>
                                 </div>
                                 <div class="preview-service-item">
                                     <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=120&h=80&fit=crop" alt="Affärsjuridik">
@@ -962,7 +993,7 @@
                                         <span class="service-name">Affärsjuridik</span>
                                         <span class="service-desc">Avtal & företagsrätt</span>
                                     </div>
-                                    <span class="service-price-tag">från 2 800 kr</span>
+                                    <span class="service-price-tag">från 2.800 kr</span>
                                 </div>
                                 <div class="preview-service-item">
                                     <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=120&h=80&fit=crop" alt="Familjerätt">
@@ -970,7 +1001,7 @@
                                         <span class="service-name">Familjerätt</span>
                                         <span class="service-desc">Skilsmässa, vårdnad, arv</span>
                                     </div>
-                                    <span class="service-price-tag">från 3 000 kr</span>
+                                    <span class="service-price-tag">från 3.000 kr</span>
                                 </div>
                             </div>
                         </div>
@@ -1117,6 +1148,62 @@
     <script src="modal.js"></script>
     <script>
         lucide.createIcons();
+
+        // Example search and filter functionality
+        function filterExamples() {
+            const searchInput = document.getElementById('exampleSearch').value.toLowerCase();
+            const examples = document.querySelectorAll('.example-card');
+
+            examples.forEach(example => {
+                const category = example.getAttribute('id') || '';
+                const title = example.querySelector('h3')?.textContent.toLowerCase() || '';
+                const description = example.querySelector('.example-details p')?.textContent.toLowerCase() || '';
+                const categoryTag = example.querySelector('.example-category')?.textContent.toLowerCase() || '';
+
+                const searchableText = category + ' ' + title + ' ' + description + ' ' + categoryTag;
+
+                if (searchableText.includes(searchInput)) {
+                    example.style.display = '';
+                } else {
+                    example.style.display = 'none';
+                }
+            });
+
+            // Reset active category when searching
+            if (searchInput) {
+                document.querySelectorAll('.category-tag').forEach(tag => tag.classList.remove('active'));
+            }
+        }
+
+        function filterByCategory(category) {
+            const examples = document.querySelectorAll('.example-card');
+            const categoryTags = document.querySelectorAll('.category-tag');
+
+            // Update active tag
+            categoryTags.forEach(tag => {
+                if (tag.getAttribute('data-category') === category) {
+                    tag.classList.add('active');
+                } else {
+                    tag.classList.remove('active');
+                }
+            });
+
+            // Clear search input
+            document.getElementById('exampleSearch').value = '';
+
+            // Filter examples
+            if (category === 'alla') {
+                examples.forEach(example => example.style.display = '');
+            } else {
+                examples.forEach(example => {
+                    if (example.getAttribute('id') === category) {
+                        example.style.display = '';
+                    } else {
+                        example.style.display = 'none';
+                    }
+                });
+            }
+        }
     </script>
 </body>
 </html>
