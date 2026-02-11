@@ -90,65 +90,117 @@ function prevStep() {
     }
 }
 
-// Handle business dropdown selection
-function handleBusinessSelect() {
-    const select = document.getElementById('business-select');
-    const value = select.value;
+// Quick select from top 5 popular options
+function selectBusinessQuick(element, value, label) {
+    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    element.classList.add('selected');
 
-    // Remove existing custom input if any
-    const existingInput = document.getElementById('custom-business-input');
-    if (existingInput) existingInput.remove();
+    bookingData.business = value;
+    bookingData.businessLabel = label;
 
-    // If "annat" is selected, show custom input field
-    if (value === 'annat') {
-        const inputHTML = `
-            <div id="custom-business-input" style="margin-top: 20px;">
-                <label for="custom-business" style="display: block; margin-bottom: 8px; font-weight: 500; color: #374151;">Beskriv din bransch</label>
-                <input type="text" id="custom-business" placeholder="T.ex. Kiropraktor, Hudvård, Arkitekt..." style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px;">
-            </div>
-        `;
-        select.parentElement.insertAdjacentHTML('afterend', inputHTML);
+    setTimeout(() => nextStep(), 300);
+}
 
-        // Focus the input field
+// Show all businesses (expand list)
+function showAllBusinesses() {
+    const allBusinesses = document.getElementById('all-businesses');
+    const popularOptions = document.querySelector('.popular-options');
+
+    if (allBusinesses.classList.contains('hidden')) {
+        allBusinesses.classList.remove('hidden');
+        popularOptions.style.display = 'none';
+
+        // Focus search field
         setTimeout(() => {
-            const input = document.getElementById('custom-business');
-            if (input) input.focus();
+            const searchInput = document.getElementById('business-search');
+            if (searchInput) searchInput.focus();
         }, 100);
     }
 }
 
-// Validate business selection before proceeding
-function validateBusinessSelect() {
-    const select = document.getElementById('business-select');
-    const value = select.value;
-
-    if (!value) {
-        alert('Vänligen välj en bransch');
-        select.focus();
-        return;
-    }
-
-    // If "annat" is selected, check custom input
-    if (value === 'annat') {
-        const customInput = document.getElementById('custom-business');
-        const customValue = customInput ? customInput.value.trim() : '';
-
-        if (!customValue) {
-            alert('Vänligen beskriv din bransch');
-            if (customInput) customInput.focus();
-            return;
-        }
-
-        bookingData.business = 'annat: ' + customValue;
-    } else {
-        bookingData.business = value;
-    }
-
-    // Remove custom input if it exists
+// Select business from searchable list
+function selectBusinessFromList(element, value, label) {
+    // Remove existing custom input if any
     const existingInput = document.getElementById('custom-business-input');
     if (existingInput) existingInput.remove();
 
+    // If "annat" is selected, show custom input
+    if (value === 'annat') {
+        const inputHTML = `
+            <div id="custom-business-input" style="margin-top: 16px;">
+                <label for="custom-business" style="display: block; margin-bottom: 8px; font-weight: 500; color: #374151;">Beskriv din bransch</label>
+                <input type="text" id="custom-business" placeholder="T.ex. Kiropraktor, Hudvård, Arkitekt..." style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px;">
+                <button onclick="submitCustomBusinessFromList()" class="btn btn-primary" style="margin-top: 12px; width: 100%;">Fortsätt</button>
+            </div>
+        `;
+        document.getElementById('all-businesses').insertAdjacentHTML('beforeend', inputHTML);
+
+        // Focus the input
+        setTimeout(() => {
+            const input = document.getElementById('custom-business');
+            if (input) input.focus();
+        }, 100);
+        return;
+    }
+
+    // Highlight selected item
+    document.querySelectorAll('.business-item').forEach(item => item.classList.remove('selected'));
+    element.classList.add('selected');
+
+    bookingData.business = value;
+    bookingData.businessLabel = label;
+
+    setTimeout(() => nextStep(), 300);
+}
+
+// Submit custom business from list
+function submitCustomBusinessFromList() {
+    const input = document.getElementById('custom-business');
+    if (!input) return;
+
+    const value = input.value.trim();
+    if (!value) {
+        alert('Vänligen beskriv din bransch');
+        input.focus();
+        return;
+    }
+
+    bookingData.business = 'annat: ' + value;
+    bookingData.businessLabel = 'Annat: ' + value;
+
+    const customInput = document.getElementById('custom-business-input');
+    if (customInput) customInput.remove();
+
     nextStep();
+}
+
+// Filter businesses by search
+function filterBusinesses() {
+    const searchInput = document.getElementById('business-search');
+    const filter = searchInput.value.toLowerCase();
+    const categories = document.querySelectorAll('.business-category');
+
+    categories.forEach(category => {
+        const items = category.querySelectorAll('.business-item');
+        let hasVisibleItems = false;
+
+        items.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            if (text.includes(filter)) {
+                item.style.display = 'block';
+                hasVisibleItems = true;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        // Hide category header if no items visible
+        const header = category.querySelector('h4');
+        if (header) {
+            header.style.display = hasVisibleItems ? 'block' : 'none';
+        }
+        category.style.display = hasVisibleItems ? 'block' : 'none';
+    });
 }
 
 // Legacy function for card-based selection (keeping for other pages if needed)
