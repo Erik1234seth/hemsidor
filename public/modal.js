@@ -41,6 +41,38 @@ function openModal() {
     generateCalendar();
 }
 
+function openModalWithBusiness(businessValue, businessLabel) {
+    // Open modal first
+    document.getElementById('bookingModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    currentStep = 1;
+    calendarStart = getMonday(new Date());
+    updateProgress();
+    showStep(1);
+    generateCalendar();
+
+    // Pre-select the business after a short delay to ensure DOM is ready
+    setTimeout(() => {
+        const businessButton = document.querySelector(`button[data-value="${businessValue}"]`);
+        if (businessButton) {
+            // If button is in extra-option, expand the list first
+            if (businessButton.classList.contains('extra-option')) {
+                const extraOptions = document.querySelectorAll('.extra-option');
+                extraOptions.forEach(option => option.classList.remove('hidden'));
+                const expandBtn = document.getElementById('expandBtn');
+                if (expandBtn) {
+                    expandBtn.classList.add('expanded');
+                    const btnSpan = expandBtn.querySelector('span');
+                    if (btnSpan) btnSpan.textContent = 'Visa färre alternativ';
+                }
+            }
+
+            // Select the business
+            selectBusiness(businessButton, businessValue, businessLabel);
+        }
+    }, 100);
+}
+
 function closeModal() {
     document.getElementById('bookingModal').classList.remove('active');
     document.body.style.overflow = '';
