@@ -90,14 +90,13 @@ function prevStep() {
     }
 }
 
-// Quick select from top popular options
-function selectBusinessQuick(element, value, label) {
+// Unified business selection
+function selectBusiness(element, value, label) {
     // Remove existing custom input if any
     const existingInput = document.getElementById('custom-business-input');
     if (existingInput) existingInput.remove();
 
     document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-    document.querySelectorAll('.business-item').forEach(c => c.classList.remove('selected'));
     element.classList.add('selected');
 
     bookingData.business = value;
@@ -109,7 +108,6 @@ function selectBusinessQuick(element, value, label) {
 // Handle "Annat" button click
 function handleAnnatClick() {
     document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-    document.querySelectorAll('.business-item').forEach(c => c.classList.remove('selected'));
 
     // Find the Annat button and mark as selected
     const annatButton = event.currentTarget;
@@ -127,7 +125,7 @@ function handleAnnatClick() {
             <button onclick="submitCustomBusiness()" class="btn btn-primary" style="margin-top: 12px; width: 100%;">Fortsätt</button>
         </div>
     `;
-    document.getElementById('expandBtn').insertAdjacentHTML('afterend', inputHTML);
+    document.getElementById('expandBtn').insertAdjacentHTML('beforebegin', inputHTML);
 
     // Focus the input
     setTimeout(() => {
@@ -157,61 +155,50 @@ function submitCustomBusiness() {
     nextStep();
 }
 
-// Select business from searchable list
-function selectBusinessFromList(element, value, label) {
-    // Remove existing custom input if any
-    const existingInput = document.getElementById('custom-business-input');
-    if (existingInput) existingInput.remove();
-
-    // Highlight selected item
-    document.querySelectorAll('.business-item').forEach(item => item.classList.remove('selected'));
-    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-    element.classList.add('selected');
-
-    bookingData.business = value;
-    bookingData.businessLabel = label;
-
-    setTimeout(() => nextStep(), 300);
-}
 
 // Toggle business list expansion
 function toggleBusinessList() {
-    const allBusinesses = document.getElementById('all-businesses');
+    const extraOptions = document.querySelectorAll('.extra-option');
     const expandBtn = document.getElementById('expandBtn');
 
-    allBusinesses.classList.toggle('hidden');
     expandBtn.classList.toggle('expanded');
 
-    if (!allBusinesses.classList.contains('hidden')) {
+    extraOptions.forEach(option => {
+        option.classList.toggle('hidden');
+    });
+
+    if (expandBtn.classList.contains('expanded')) {
         expandBtn.querySelector('span').textContent = 'Visa färre alternativ';
     } else {
         expandBtn.querySelector('span').textContent = 'Visa fler alternativ';
     }
 }
 
-// Filter businesses by search (flat list, no sections)
+// Filter business cards by search
 function filterBusinesses() {
     const searchInput = document.getElementById('business-search');
     const filter = searchInput.value.toLowerCase();
-    const items = document.querySelectorAll('.business-item');
+    const cards = document.querySelectorAll('.option-card');
+    const expandBtn = document.getElementById('expandBtn');
 
     // If user is typing, auto-expand the list
     if (filter.length > 0) {
-        const allBusinesses = document.getElementById('all-businesses');
-        const expandBtn = document.getElementById('expandBtn');
-        if (allBusinesses.classList.contains('hidden')) {
-            allBusinesses.classList.remove('hidden');
-            expandBtn.classList.add('expanded');
-            expandBtn.querySelector('span').textContent = 'Visa färre alternativ';
-        }
+        const extraOptions = document.querySelectorAll('.extra-option');
+        extraOptions.forEach(option => {
+            option.classList.remove('hidden');
+        });
+        expandBtn.classList.add('expanded');
+        expandBtn.querySelector('span').textContent = 'Visa färre alternativ';
     }
 
-    items.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        if (text.includes(filter)) {
-            item.style.display = 'block';
+    cards.forEach(card => {
+        const searchText = card.getAttribute('data-search') || '';
+        const cardText = card.textContent.toLowerCase();
+
+        if (searchText.includes(filter) || cardText.includes(filter)) {
+            card.style.display = '';
         } else {
-            item.style.display = 'none';
+            card.style.display = 'none';
         }
     });
 }
