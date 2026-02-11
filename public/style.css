@@ -863,10 +863,20 @@ header nav {
     color: var(--text-muted);
 }
 
-.service-price-tag {
+.service-badge {
+    display: inline-block;
     font-size: 0.65rem;
-    font-weight: 700;
-    color: #ec4899;
+    font-weight: 600;
+    color: #6b7280;
+    background: #f3f4f6;
+    padding: 4px 10px;
+    border-radius: 12px;
+    margin-right: 6px;
+}
+
+.service-badge.popular {
+    background: #fef3c7;
+    color: #92400e;
 }
 
 /* Restaurang specific */
