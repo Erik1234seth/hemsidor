@@ -95,37 +95,55 @@ function selectOption(element, field) {
     parent.querySelectorAll('.option-card, .option-card-wide').forEach(c => c.classList.remove('selected'));
     element.classList.add('selected');
 
-    // If "annat" is selected in business type, show custom input
+    // If "annat" is selected in business type, show custom input and DON'T proceed
     if (field === 'business' && element.dataset.value === 'annat') {
+        // Remove existing input if any
         const existingInput = document.getElementById('custom-business-input');
-        if (!existingInput) {
-            const inputHTML = `
-                <div id="custom-business-input" style="margin-top: 20px; animation: fadeIn 0.3s;">
-                    <label for="custom-business" style="display: block; margin-bottom: 8px; font-weight: 500; color: #374151;">Vilken bransch?</label>
-                    <input type="text" id="custom-business" placeholder="T.ex. Tandläkare, PT, Hudvård..." style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 16px;" autofocus>
-                    <button onclick="submitCustomBusiness()" class="btn btn-primary" style="margin-top: 12px; width: 100%;">Fortsätt</button>
-                </div>
-            `;
-            parent.insertAdjacentHTML('afterend', inputHTML);
-        }
-    } else {
-        const customInput = document.getElementById('custom-business-input');
-        if (customInput) customInput.remove();
-        bookingData[field] = element.dataset.value;
-        setTimeout(() => nextStep(), 300);
+        if (existingInput) existingInput.remove();
+
+        // Create and insert custom input field
+        const inputHTML = `
+            <div id="custom-business-input" style="margin-top: 20px;">
+                <label for="custom-business" style="display: block; margin-bottom: 8px; font-weight: 500; color: #374151;">Vilken bransch?</label>
+                <input type="text" id="custom-business" placeholder="T.ex. Tandläkare, PT, Hudvård..." style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 16px;">
+                <button onclick="submitCustomBusiness()" class="btn btn-primary" style="margin-top: 12px; width: 100%;">Fortsätt</button>
+            </div>
+        `;
+        parent.insertAdjacentHTML('afterend', inputHTML);
+
+        // Focus the input field
+        setTimeout(() => {
+            const input = document.getElementById('custom-business');
+            if (input) input.focus();
+        }, 100);
+
+        // IMPORTANT: Return here to NOT proceed to next step
+        return;
     }
+
+    // For all other options, remove custom input if it exists and proceed
+    const customInput = document.getElementById('custom-business-input');
+    if (customInput) customInput.remove();
+
+    bookingData[field] = element.dataset.value;
+    setTimeout(() => nextStep(), 300);
 }
 
 function submitCustomBusiness() {
     const input = document.getElementById('custom-business');
+    if (!input) return;
+
     const value = input.value.trim();
     if (!value) {
         alert('Vänligen ange din bransch');
+        input.focus();
         return;
     }
+
     bookingData.business = 'annat: ' + value;
     const customInput = document.getElementById('custom-business-input');
     if (customInput) customInput.remove();
+
     nextStep();
 }
 
