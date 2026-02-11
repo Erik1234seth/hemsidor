@@ -420,8 +420,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Auto-open modal only on first visit (per session)
-    if (!sessionStorage.getItem('modalShown')) {
+    // Auto-open modal only on first visit (per session) and only on homepage
+    const isHomepage = window.location.pathname === '/' ||
+                       window.location.pathname.endsWith('index.html') ||
+                       window.location.pathname === '';
+
+    if (!sessionStorage.getItem('modalShown') && isHomepage) {
         openModal();
         sessionStorage.setItem('modalShown', 'true');
     }
