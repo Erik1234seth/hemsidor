@@ -292,8 +292,8 @@ function generateCalendar() {
         const dayEl = document.createElement('button');
         dayEl.className = 'calendar-day';
 
-        const isPast = date < today;
-        if (isPast) {
+        const isPastOrToday = date <= today;
+        if (isPastOrToday) {
             dayEl.classList.add('disabled');
             dayEl.disabled = true;
         }
@@ -315,8 +315,10 @@ function generateCalendar() {
         dayEl.onclick = () => selectDate(date, dayEl);
         container.appendChild(dayEl);
 
-        // Auto-select today on first load
-        if (!selectedDate && date.toDateString() === today.toDateString()) {
+        // Auto-select tomorrow on first load
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        if (!selectedDate && date.toDateString() === tomorrow.toDateString()) {
             selectedDate = date;
             dayEl.classList.add('selected');
             setTimeout(() => generateTimeSlots(), 0);
