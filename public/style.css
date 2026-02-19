@@ -309,6 +309,24 @@ header nav {
     color: var(--text);
 }
 
+.hero-price {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.price-amount {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.03em;
+}
+
+.price-period {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
 /* Hero Visual */
 .hero-visual {
     position: relative;
@@ -1449,6 +1467,28 @@ header nav {
     font-size: 0.8rem;
     color: var(--text-subtle);
     margin-top: 16px;
+}
+
+.form-confirmation {
+    text-align: center;
+    padding: 48px 24px;
+}
+
+.form-confirmation .confirmation-icon {
+    color: var(--primary);
+    margin-bottom: 16px;
+}
+
+.form-confirmation h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.form-confirmation p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
 }
 
 /* ===== Footer ===== */

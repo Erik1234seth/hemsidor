@@ -114,19 +114,13 @@
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                                         <path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                    <span>Gratis första samtal</span>
+                                    <span>Gratis samtal</span>
                                 </div>
                                 <div class="promise-item">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                                         <path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                     <span>Inga dolda avgifter</span>
-                                </div>
-                                <div class="promise-item">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                        <path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <span>Betala när du är nöjd</span>
                                 </div>
                             </div>
                         </div>
@@ -164,6 +158,16 @@
                         </button>
                         <p class="form-note">Vi säljer aldrig dina uppgifter. Läs vår integritetspolicy.</p>
                     </form>
+                    <div class="form-confirmation" id="formConfirmation" style="display:none;">
+                        <div class="confirmation-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="3"/>
+                                <path d="M32 18L21 29l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Tack för ditt meddelande!</h3>
+                        <p>Vi har tagit emot ditt meddelande och återkommer så snart vi kan, vanligtvis inom 24 timmar.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -304,5 +308,12 @@
     </div>
 
     <script src="modal.js"></script>
+    <script>
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.style.display = 'none';
+            document.getElementById('formConfirmation').style.display = 'block';
+        });
+    </script>
 </body>
 </html>
