@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
@@ -51,27 +51,15 @@
             </div>
         </section>
 
-        <!-- Search Section -->
+        <!-- Category Filter -->
         <section class="examples-search">
             <div class="container">
-                <div class="search-box-wrapper">
-                    <input type="text" id="exampleSearch" placeholder="Sök efter bransch (t.ex. frisör, restaurang, bygg...)" onkeyup="filterExamples()">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="search-icon">
-                        <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2"/>
-                        <path d="M12.5 12.5L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </div>
                 <div class="popular-categories" id="popularCategories">
                     <button class="category-tag active" data-category="alla" onclick="filterByCategory('alla')">Alla</button>
                     <button class="category-tag" data-category="frisor" onclick="filterByCategory('frisor')">Frisör</button>
                     <button class="category-tag" data-category="restaurang" onclick="filterByCategory('restaurang')">Restaurang</button>
                     <button class="category-tag" data-category="hantverkare" onclick="filterByCategory('hantverkare')">Bygg</button>
-                    <button class="category-tag" data-category="pt" onclick="filterByCategory('pt')">PT</button>
-                    <button class="category-tag" data-category="designer" onclick="filterByCategory('designer')">Designer</button>
                     <button class="category-tag" data-category="skonhetsvard" onclick="filterByCategory('skonhetsvard')">Skönhet</button>
-                    <button class="category-tag" data-category="veterinar" onclick="filterByCategory('veterinar')">Veterinär</button>
-                    <button class="category-tag" data-category="fotograf" onclick="filterByCategory('fotograf')">Fotograf</button>
-                    <button class="category-tag" data-category="scenkonst" onclick="filterByCategory('scenkonst')">Scenkonst</button>
                     <button class="category-tag" data-category="konsult" onclick="filterByCategory('konsult')">Konsult</button>
                 </div>
             </div>
@@ -89,76 +77,58 @@
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                                     <path d="M7 1v4M7 9v4M1 7h4M9 7h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                                 </svg>
-                                <span class="url-text">www.salongbella.se</span>
+                                <span class="url-text">www.studiomonroe.se</span>
                             </div>
                         </div>
                         <div class="preview-site">
-                            <nav class="preview-nav frisor-nav">
-                                <div class="preview-logo">
-                                    <span class="logo-dot pink"></span>
-                                    Salong Bella
-                                </div>
+                            <nav class="preview-nav dark-nav frisor-nav">
+                                <div class="preview-logo frisor-logo">Studio Monroe</div>
                                 <div class="preview-nav-links">
                                     <span class="active">Hem</span>
-                                    <span>Tjänster</span>
-                                    <span>Priser</span>
-                                    <span>Om oss</span>
+                                    <span>Om Oss</span>
+                                    <span>Prislista</span>
+                                    <span>Frisörer</span>
                                 </div>
-                                <div class="preview-nav-btn pink-btn">Boka tid</div>
+                                <div class="preview-nav-btn gold-btn" style="border-radius:99px;">Boka online</div>
                             </nav>
-                            <div class="preview-hero-full frisor-hero-full">
-                                <div class="preview-hero-text">
-                                    <span class="preview-badge">Nyöppnat i Göteborg</span>
-                                    <h2 class="preview-heading">Välkommen till<br><span class="highlight-pink">Salong Bella</span></h2>
-                                    <p class="preview-paragraph">Vi erbjuder professionell hårvård i en avslappnad miljö. Klippning, färgning, slingor och styling av erfarna frisörer.</p>
-                                    <div class="preview-cta-row">
-                                        <span class="preview-btn-lg pink-btn">Boka din tid</span>
-                                        <span class="preview-btn-outline">Se våra priser</span>
-                                    </div>
-                                </div>
-                                <div class="preview-hero-img">
-                                    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&h=300&fit=crop" alt="Salong">
+                            <div class="preview-hero-img-bg frisor-hero">
+                                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=700&h=280&fit=crop" alt="Salong">
+                                <div class="hero-overlay"></div>
+                                <div class="hero-center-content">
+                                    <h2 class="preview-heading light frisor-script">Studio Monroe</h2>
+                                    <p class="preview-paragraph light" style="text-transform:uppercase;letter-spacing:0.15em;font-size:0.6rem;">Frisör & Salong</p>
                                 </div>
                             </div>
-                            <div class="preview-services-row">
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=120&h=80&fit=crop" alt="Klippning">
-                                    <div class="service-info">
-                                        <span class="service-name">Klippning</span>
-                                        <span class="service-desc">Dam & Herr</span>
-                                    </div>
-                                    <span class="service-badge">45 min</span>
+                            <div class="preview-reviews-bar dark-reviews">
+                                <div class="preview-review-card dark-review">
+                                    <div class="review-stars-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                                    <p>"Bästa salongen jag besökt!"</p>
+                                    <span>Sandra K.</span>
                                 </div>
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=120&h=80&fit=crop" alt="Färgning">
-                                    <div class="service-info">
-                                        <span class="service-name">Färgning</span>
-                                        <span class="service-desc">Helfärg & slingor</span>
-                                    </div>
-                                    <span class="service-badge">Populär</span>
+                                <div class="preview-review-card dark-review">
+                                    <div class="review-stars-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                                    <p>"Äntligen en frisör som lyssnar!"</p>
+                                    <span>Emma L.</span>
                                 </div>
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=120&h=80&fit=crop" alt="Styling">
-                                    <div class="service-info">
-                                        <span class="service-name">Styling</span>
-                                        <span class="service-desc">Fest & vardag</span>
-                                    </div>
-                                    <span class="service-badge">60 min</span>
+                                <div class="preview-review-card dark-review">
+                                    <div class="review-stars-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                                    <p>"Proffsigt från start till slut."</p>
+                                    <span>Maria A.</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="example-details">
-                        <span class="example-category">Frisör & Skönhet</span>
-                        <h3>Salong Bella</h3>
-                        <p>En modern och inbjudande hemsida för frisörer. Enkel bokning, tydliga priser och en design som får nya kunder att känna sig välkomna.</p>
+                        <span class="example-category">Frisör & Salong</span>
+                        <h3>Studio Monroe</h3>
+                        <p>En mörk och atmosfärisk hemsida för salonger. Elegant design med stort hero-foto, kundrecensioner och en känsla som speglar kvalitet och kreativitet.</p>
                         <ul class="example-features">
                             <li>Online-bokning</li>
-                            <li>Prislista</li>
+                            <li>Behandlingsmeny</li>
                             <li>Bildgalleri</li>
-                            <li>Mobilanpassad</li>
+                            <li>Kundrecensioner</li>
                         </ul>
-                        <button class="btn btn-primary" onclick="openModalWithBusiness('frisor', 'Frisör & Salong')">Jag vill ha en sådan här</button>
+                        <a href="exempel-frisor.html" class="btn btn-primary">Se hela exemplet</a>
                     </div>
                 </div>
 
@@ -229,7 +199,7 @@
                             <li>Bildgalleri</li>
                             <li>Öppettider</li>
                         </ul>
-                        <button class="btn btn-primary" onclick="openModalWithBusiness('restaurang', 'Restaurang & Café')">Jag vill ha en sådan här</button>
+                        <a href="exempel-restaurang.html" class="btn btn-primary">Se hela exemplet</a>
                     </div>
                 </div>
 
@@ -261,9 +231,9 @@
                             </nav>
                             <div class="preview-hero-split">
                                 <div class="hero-split-content">
-                                    <span class="preview-badge green-badge">Lokalt byggföretag sedan 2004</span>
+                                    <span class="preview-badge green-badge">Sedan 2004</span>
                                     <h2 class="preview-heading">Renovering & <span class="highlight-green">nybyggnation</span></h2>
-                                    <p class="preview-paragraph">Vi hjälper dig med allt från badrumsrenovering till nybyggnation. 20 års erfarenhet.</p>
+                                    <p class="preview-paragraph">20 års erfarenhet och alltid fast pris.</p>
                                     <div class="preview-cta-row">
                                         <span class="preview-btn-lg green-btn">Begär gratis offert</span>
                                     </div>
@@ -279,7 +249,7 @@
                                     </div>
                                 </div>
                                 <div class="hero-split-image">
-                                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=350&h=280&fit=crop" alt="Byggprojekt">
+                                    <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?w=350&h=280&fit=crop" alt="Nybyggt hus">
                                     <div class="image-badge">
                                         <span class="badge-number">200+</span>
                                         <span class="badge-text">Projekt</span>
@@ -291,24 +261,23 @@
                                 <div class="project-thumbs">
                                     <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=60&h=45&fit=crop" alt="Projekt 1">
                                     <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=60&h=45&fit=crop" alt="Projekt 2">
-                                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=60&h=45&fit=crop" alt="Projekt 3">
-                                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=60&h=45&fit=crop" alt="Projekt 4">
+                                    <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?w=60&h=45&fit=crop" alt="Projekt 3">
                                 </div>
-                                <span class="projects-link">Se alla projekt</span>
+                                <span class="projects-link">Se alla</span>
                             </div>
                         </div>
                     </div>
                     <div class="example-details">
                         <span class="example-category">Bygg & Hantverk</span>
                         <h3>Johanssons Bygg</h3>
-                        <p>En professionell hemsida för hantverkare. Visa tidigare projekt, få in offertförfrågningar och bygg förtroende hos nya kunder.</p>
+                        <p>En rak och professionell hemsida för byggföretag. Projektgalleri, offertformulär och kundrecensioner.</p>
                         <ul class="example-features">
                             <li>Offertformulär</li>
                             <li>Projektgalleri</li>
                             <li>Kundrecensioner</li>
                             <li>Kontaktinfo</li>
                         </ul>
-                        <button class="btn btn-primary" onclick="openModalWithBusiness('hantverkare', 'Byggföretag')">Jag vill ha en sådan här</button>
+                        <a href="exempel-bygg.html" class="btn btn-primary">Se hela exemplet</a>
                     </div>
                 </div>
 
@@ -372,112 +341,7 @@
                             <li>Om mig-sektion</li>
                             <li>Blogg</li>
                         </ul>
-                        <button class="btn btn-primary" onclick="openModalWithBusiness('konsult', 'Konsult')">Jag vill ha en sådan här</button>
-                    </div>
-                </div>
-
-                <!-- PT Example -->
-                <div class="example-card" id="pt">
-                    <div class="example-browser">
-                        <div class="browser-bar-large">
-                            <div class="browser-dots"><span></span><span></span><span></span></div>
-                            <div class="browser-url-bar">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v4M7 9v4M1 7h4M9 7h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                                <span class="url-text">www.personaltrainingpro.se</span>
-                            </div>
-                        </div>
-                        <div class="preview-site">
-                            <nav class="preview-nav"><div class="preview-logo"><span class="logo-dot red"></span>PT Pro</div><div class="preview-nav-links"><span class="active">Hem</span><span>Tjänster</span><span>Resultat</span><span>Om mig</span></div><div class="preview-nav-btn red-btn">Boka konsultation</div></nav>
-                            <div class="preview-hero-full">
-                                <div class="preview-hero-text">
-                                    <span class="preview-badge">Certifierad PT sedan 2018</span>
-                                    <h2 class="preview-heading">Nå dina <span class="highlight-red">träningsmål</span></h2>
-                                    <p class="preview-paragraph">Skräddarsydda träningsprogram, kostråd och kontinuerlig uppföljning. Personlig träning i Malmö eller online.</p>
-                                    <div class="preview-cta-row"><span class="preview-btn-lg red-btn">Boka gratis konsultation</span><span class="preview-btn-outline">Se mina resultat</span></div>
-                                </div>
-                                <div class="preview-hero-img"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=300&fit=crop" alt="PT"></div>
-                            </div>
-                            <div class="preview-services-row">
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=120&h=80&fit=crop" alt="PT">
-                                    <div class="service-info">
-                                        <span class="service-name">Personlig träning</span>
-                                        <span class="service-desc">1-1 träning</span>
-                                    </div>
-                                    <span class="service-badge">Mest bokad</span>
-                                </div>
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=120&h=80&fit=crop" alt="Kost">
-                                    <div class="service-info">
-                                        <span class="service-name">Kostprogram</span>
-                                        <span class="service-desc">Personligt anpassat</span>
-                                    </div>
-                                    <span class="service-badge">60 min</span>
-                                </div>
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=120&h=80&fit=crop" alt="Online">
-                                    <div class="service-info">
-                                        <span class="service-name">Online-coaching</span>
-                                        <span class="service-desc">Träna hemifrån</span>
-                                    </div>
-                                    <span class="service-badge">Flexibelt</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="example-details">
-                        <span class="example-category">Träning & Hälsa</span>
-                        <h3>PT Pro</h3>
-                        <p>En kraftfull hemsida för personliga tränare. Visa dina framgångshistorier, presentera olika träningsprogram och låt kunder boka direkt online.</p>
-                        <ul class="example-features"><li>Online-bokningssystem</li><li>Träningsprogram & priser</li><li>Före/efter-galleri</li><li>Kundrecensioner</li><li>Bloggsystem</li><li>Kontaktformulär</li></ul>
-                        <button class="btn btn-primary" onclick="openModalWithBusiness('pt', 'Personlig Tränare')">Jag vill ha en sådan här</button>
-                    </div>
-                </div>
-
-                <!-- Designer Example -->
-                <div class="example-card reverse" id="designer">
-                    <div class="example-browser">
-                        <div class="browser-bar-large">
-                            <div class="browser-dots"><span></span><span></span><span></span></div>
-                            <div class="browser-url-bar">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v4M7 9v4M1 7h4M9 7h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                                <span class="url-text">www.creativestudio.se</span>
-                            </div>
-                        </div>
-                        <div class="preview-site">
-                            <nav class="preview-nav"><div class="preview-logo">Creative Studio</div><div class="preview-nav-links"><span class="active">Portfolio</span><span>Case Studies</span><span>Process</span><span>Kontakt</span></div><div class="preview-nav-btn">Boka Discovery Call</div></nav>
-                            <div class="preview-hero-split">
-                                <div class="hero-split-content">
-                                    <span class="preview-badge">International Design Excellence Award Winner</span>
-                                    <h2 class="preview-heading">Design som <span class="highlight-purple">förändrar branscher</span></h2>
-                                    <p class="preview-paragraph">Vi är en strategisk designbyrå som utvecklar visionära varumärkesidentiteter, digitala upplevelser och innovativa designsystem för globala marknader och framtidens ledare.</p>
-                                    <div class="preview-cta-row"><span class="preview-btn-lg">Utforska portfolio</span><span class="preview-btn-outline">Boka strategisamtal</span></div>
-                                    <div class="trust-badges">
-                                        <span class="trust-badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11.667 3.5L5.25 9.917 2.333 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Red Dot & IF Design Awards</span>
-                                        <span class="trust-badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11.667 3.5L5.25 9.917 2.333 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Top 5% Global Design Agencies</span>
-                                        <span class="trust-badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11.667 3.5L5.25 9.917 2.333 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Featured in Awwwards, Behance</span>
-                                    </div>
-                                </div>
-                                <div class="hero-split-image"><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=350&h=280&fit=crop" alt="Design Studio"></div>
-                            </div>
-                            <div class="preview-projects-bar">
-                                <span class="projects-label">Utvalda case studies:</span>
-                                <div class="project-thumbs">
-                                    <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=60&h=45&fit=crop" alt="Brand Identity">
-                                    <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?w=60&h=45&fit=crop" alt="Digital Experience">
-                                    <img src="https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=60&h=45&fit=crop" alt="Product Design">
-                                    <img src="https://images.unsplash.com/photo-1626785774625-ddcddc3445e9?w=60&h=45&fit=crop" alt="Packaging">
-                                </div>
-                                <span class="projects-link">Visa hela portfolion →</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="example-details">
-                        <span class="example-category">Design & Kreativt</span>
-                        <h3>Creative Studio</h3>
-                        <p>En exceptionellt sofistikerad portfolio-hemsida för etablerade designbyråer och kreativa studios. Imponera med award-winning arbete, strategiska case studies och ett premium uttryck som attraherar high-end kunder.</p>
-                        <ul class="example-features"><li>Interaktivt portfolio med filtersystem</li><li>Djupgående case studies med ROI</li><li>Designprocess visualisering</li><li>Awards & publikationer</li><li>Strategisk discovery call-bokning</li><li>Internationell klientlista</li></ul>
-                        <button class="btn btn-primary" onclick="openModalWithBusiness('designer', 'Grafisk Designer')">Jag vill ha en sådan här</button>
+                        <a href="exempel-konsult.html" class="btn btn-primary">Se hela exemplet</a>
                     </div>
                 </div>
 
@@ -488,221 +352,64 @@
                             <div class="browser-dots"><span></span><span></span><span></span></div>
                             <div class="browser-url-bar">
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v4M7 9v4M1 7h4M9 7h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                                <span class="url-text">www.serenityspaclinic.se</span>
+                                <span class="url-text">www.rosenshudvard.se</span>
                             </div>
                         </div>
                         <div class="preview-site">
-                            <nav class="preview-nav"><div class="preview-logo"><span class="logo-dot pink"></span>Serenity Spa</div><div class="preview-nav-links"><span class="active">Hem</span><span>Signature Treatments</span><span>Wellness Packages</span><span>Om oss</span></div><div class="preview-nav-btn pink-btn">Boka din upplevelse</div></nav>
-                            <div class="preview-hero-full">
-                                <div class="preview-hero-text">
-                                    <span class="preview-badge">Exklusiv spa-klinik med certifierade terapeuter</span>
-                                    <h2 class="preview-heading">Din fristad för <span class="highlight-pink">lyxig välbefinnande</span></h2>
-                                    <p class="preview-paragraph">Upptäck vår award-winning spa-destination där avancerad hudvård möter holistisk healing. Vi kombinerar skandinavisk minimalism med exklusiva behandlingar från världsledande skönhetsmärken som La Mer, Biologique Recherche och Natura Bissé.</p>
-                                    <div class="preview-cta-row"><span class="preview-btn-lg pink-btn">Reservera behandling</span><span class="preview-btn-outline">Se behandlingsmeny</span></div>
-                                    <div class="trust-badges">
-                                        <span class="trust-badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11.667 3.5L5.25 9.917 2.333 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>CIDESCO-certifierade terapeuter</span>
-                                        <span class="trust-badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11.667 3.5L5.25 9.917 2.333 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Best Spa 2025 - Vogue Sverige</span>
-                                        <span class="trust-badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11.667 3.5L5.25 9.917 2.333 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Ekologiska premium-produkter</span>
-                                    </div>
+                            <nav class="preview-nav dark-nav spa-nav">
+                                <div class="preview-logo spa-logo"><span class="logo-dot pink"></span>Rosens Hudvård</div>
+                                <div class="preview-nav-links">
+                                    <span class="active">Hem</span>
+                                    <span>Behandlingar</span>
+                                    <span>Om oss</span>
+                                    <span>Kontakt</span>
                                 </div>
-                                <div class="preview-hero-img"><img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=400&h=300&fit=crop" alt="Luxury Spa Interior"></div>
+                                <div class="preview-nav-btn pink-btn" style="border-radius:99px;">Boka behandling</div>
+                            </nav>
+                            <div class="preview-hero-img-bg spa-hero">
+                                <img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=700&h=280&fit=crop" alt="Spa">
+                                <div class="hero-overlay" style="background:rgba(0,0,0,0.5);"></div>
+                                <div class="hero-center-content">
+                                    <h2 class="preview-heading light spa-script">Rosens Hudvård</h2>
+                                    <p class="preview-paragraph light" style="text-transform:uppercase;letter-spacing:0.15em;font-size:0.6rem;">Hudvård & Skönhet</p>
+                                </div>
                             </div>
-                            <div class="preview-services-row">
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=120&h=80&fit=crop" alt="Signature Facial">
+                            <div class="preview-services-row" style="background:#1a1a1a;border-top:1px solid #333;">
+                                <div class="preview-service-item" style="background:#222;">
+                                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=120&h=80&fit=crop" alt="Ansiktsbehandling">
                                     <div class="service-info">
-                                        <span class="service-name">Signature Radiance Facial</span>
-                                        <span class="service-desc">90 min transformation</span>
+                                        <span class="service-name" style="color:#fff;">Ansiktsbehandling</span>
+                                        <span class="service-desc" style="color:#888;">60 min</span>
                                     </div>
-                                    <span class="service-badge">Signature</span>
                                 </div>
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=120&h=80&fit=crop" alt="Holistic Massage">
+                                <div class="preview-service-item" style="background:#222;">
+                                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=120&h=80&fit=crop" alt="Massage">
                                     <div class="service-info">
-                                        <span class="service-name">Holistic Healing Massage</span>
-                                        <span class="service-desc">120 min fullkomlig vila</span>
+                                        <span class="service-name" style="color:#fff;">Holistisk massage</span>
+                                        <span class="service-desc" style="color:#888;">90 min</span>
                                     </div>
-                                    <span class="service-badge">Premium</span>
                                 </div>
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=120&h=80&fit=crop" alt="Advanced Treatment">
+                                <div class="preview-service-item" style="background:#222;">
+                                    <img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=120&h=80&fit=crop" alt="LED-terapi">
                                     <div class="service-info">
-                                        <span class="service-name">LED Light Therapy</span>
-                                        <span class="service-desc">Avancerad anti-aging</span>
+                                        <span class="service-name" style="color:#fff;">LED-ljusterapi</span>
+                                        <span class="service-desc" style="color:#888;">45 min</span>
                                     </div>
-                                    <span class="service-badge">Medicinsk</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="example-details">
                         <span class="example-category">Skönhet & Vård</span>
-                        <h3>Beauty Spa</h3>
-                        <p>En extraordinärt lyxig hemsida för high-end spa-kliniker och premium wellness-center. Skapad för att attrahera kvalitetsmedvetna kunder som söker exklusiva behandlingar, avancerad hudvård och en transformativ spa-upplevelse.</p>
-                        <ul class="example-features"><li>Exklusivt bokningssystem med medlemskap</li><li>Detaljerade behandlingsmenyer med premiumpaket</li><li>Elegant bildgalleri & virtuell tour</li><li>Terapeutpresentationer med certifieringar</li><li>Digitalt presentkorts- & voucher-system</li><li>Members-only erbjudanden</li></ul>
-                        <button class="btn btn-primary" onclick="openModalWithBusiness('skonhetsvard', 'Skönhetsvård & Spa')">Jag vill ha en sådan här</button>
-                    </div>
-                </div>
-
-                <!-- Veterinär Example -->
-                <div class="example-card reverse" id="veterinar">
-                    <div class="example-browser">
-                        <div class="browser-bar-large">
-                            <div class="browser-dots"><span></span><span></span><span></span></div>
-                            <div class="browser-url-bar">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v4M7 9v4M1 7h4M9 7h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                                <span class="url-text">www.djurkliniken.se</span>
-                            </div>
-                        </div>
-                        <div class="preview-site">
-                            <nav class="preview-nav"><div class="preview-logo"><span class="logo-dot green"></span>Djurkliniken</div><div class="preview-nav-links"><span class="active">Start</span><span>Tjänster</span><span>Akut</span><span>Om oss</span></div><div class="preview-nav-btn green-btn">Ring oss</div></nav>
-                            <div class="preview-hero-split">
-                                <div class="hero-split-content">
-                                    <span class="preview-badge green-badge">Öppet vardagar 8-20, helger 10-16</span>
-                                    <h2 class="preview-heading">Veterinärvård med <span class="highlight-green">omtanke</span></h2>
-                                    <p class="preview-paragraph">Erfarna veterinärer som tar hand om din hund, katt eller mindre husdjur. Akutmottagning, operationer, vaccinationer och rutinbesök.</p>
-                                    <div class="preview-cta-row"><span class="preview-btn-lg green-btn">Boka tid</span><span class="preview-btn-outline">Akuttelefon</span></div>
-                                    <div class="trust-badges">
-                                        <span class="trust-badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11.667 3.5L5.25 9.917 2.333 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Certifierade veterinärer</span>
-                                        <span class="trust-badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11.667 3.5L5.25 9.917 2.333 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>24/7 telefonrådgivning</span>
-                                    </div>
-                                </div>
-                                <div class="hero-split-image"><img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=350&h=280&fit=crop" alt="Veterinär"></div>
-                            </div>
-                            <div class="preview-services-row">
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=120&h=80&fit=crop" alt="Hälsokontroll">
-                                    <div class="service-info">
-                                        <span class="service-name">Hälsokontroll</span>
-                                        <span class="service-desc">Grundläggande undersökning</span>
-                                    </div>
-                                    <span class="service-badge">30 min</span>
-                                </div>
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=120&h=80&fit=crop" alt="Vaccination">
-                                    <div class="service-info">
-                                        <span class="service-name">Vaccination</span>
-                                        <span class="service-desc">Inkl. konsultation</span>
-                                    </div>
-                                    <span class="service-badge">Vaccination</span>
-                                </div>
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1415369629372-26f2fe60c467?w=120&h=80&fit=crop" alt="Akut">
-                                    <div class="service-info">
-                                        <span class="service-name">Akutbesök</span>
-                                        <span class="service-desc">Alltid välkommen</span>
-                                    </div>
-                                    <span class="service-badge">Akut</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="example-details">
-                        <span class="example-category">Djurvård</span>
-                        <h3>Djurkliniken</h3>
-                        <p>En professionell och trygg hemsida för veterinärkliniker. Visa öppettider tydligt, presentera ditt team, lista tjänster med priser och gör det lätt att boka tid eller ringa akut.</p>
-                        <ul class="example-features"><li>Online-bokningssystem</li><li>Akuttelefon framhävd</li><li>Prislista</li><li>Teamet</li><li>Öppettider</li><li>Kontaktformulär</li></ul>
-                        <button class="btn btn-primary" onclick="openModalWithBusiness('veterinar', 'Veterinär')">Jag vill ha en sådan här</button>
-                    </div>
-                </div>
-
-                <!-- Fotograf Example -->
-                <div class="example-card reverse" id="fotograf">
-                    <div class="example-browser">
-                        <div class="browser-bar-large">
-                            <div class="browser-dots"><span></span><span></span><span></span></div>
-                            <div class="browser-url-bar">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v4M7 9v4M1 7h4M9 7h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                                <span class="url-text">www.fotograflindqvist.se</span>
-                            </div>
-                        </div>
-                        <div class="preview-site">
-                            <nav class="preview-nav minimal-nav"><div class="preview-logo">Lindqvist Foto</div><div class="preview-nav-links"><span class="active">Portfolio</span><span>Tjänster</span><span>Priser</span><span>Om mig</span></div><div class="preview-nav-btn">Boka session</div></nav>
-                            <div class="preview-hero-split">
-                                <div class="hero-split-content">
-                                    <span class="preview-badge">Fotograf i Stockholm sedan 2012</span>
-                                    <h2 class="preview-heading">Fånga dina <span class="highlight-purple">speciella ögonblick</span></h2>
-                                    <p class="preview-paragraph">Professionell fotografi för bröllop, företagsporträtt, familj och event. Jag skapar tidlösa bilder som berättar er unika historia med känslomässigt djup och konstnärligt öga.</p>
-                                    <div class="preview-cta-row"><span class="preview-btn-lg">Se portfolio</span><span class="preview-btn-outline">Boka fotosession</span></div>
-                                </div>
-                                <div class="hero-split-image"><img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=350&h=280&fit=crop" alt="Fotograf"></div>
-                            </div>
-                            <div class="preview-projects-bar">
-                                <span class="projects-label">Senaste uppdragen:</span>
-                                <div class="project-thumbs">
-                                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=60&h=45&fit=crop" alt="Bröllop">
-                                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=60&h=45&fit=crop" alt="Porträtt">
-                                    <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=60&h=45&fit=crop" alt="Event">
-                                    <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=60&h=45&fit=crop" alt="Företag">
-                                </div>
-                                <span class="projects-link">Se hela portfolion</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="example-details">
-                        <span class="example-category">Fotografi & Kreativt</span>
-                        <h3>Lindqvist Foto</h3>
-                        <p>En visuellt fantastisk portfolio-hemsida för fotografer. Showcase ditt bästa arbete i fullskärmsbilder, filtrera efter kategori, presentera paketpriser och låt kunder boka fotosessioner direkt online.</p>
-                        <ul class="example-features"><li>Portfolio-galleri med kategorier</li><li>Bokningssystem för sessioner</li><li>Paket & prislista</li><li>Om fotografen</li><li>Kundrecensioner med bilder</li><li>Kontaktformulär</li></ul>
-                        <button class="btn btn-primary" onclick="openModalWithBusiness('fotograf', 'Fotograf')">Jag vill ha en sådan här</button>
-                    </div>
-                </div>
-
-                <!-- Scenkonst Example -->
-                <div class="example-card" id="scenkonst">
-                    <div class="example-browser">
-                        <div class="browser-bar-large">
-                            <div class="browser-dots"><span></span><span></span><span></span></div>
-                            <div class="browser-url-bar">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v4M7 9v4M1 7h4M9 7h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                                <span class="url-text">www.teaternstockholm.se</span>
-                            </div>
-                        </div>
-                        <div class="preview-site">
-                            <nav class="preview-nav dark-nav"><div class="preview-logo"><span class="logo-dot red"></span>Teatern</div><div class="preview-nav-links"><span class="active">Start</span><span>Föreställningar</span><span>Biljetter</span><span>Om oss</span></div><div class="preview-nav-btn red-btn">Köp biljett</div></nav>
-                            <div class="preview-hero-full">
-                                <div class="preview-hero-text">
-                                    <span class="preview-badge">Premiär 15 mars: Hamlet</span>
-                                    <h2 class="preview-heading">Upplev magisk <span class="highlight-red">teaterkonst</span></h2>
-                                    <p class="preview-paragraph">En intim teaterscen i Stockholms hjärta. Vi spelar klassiker och moderna pjäser i en unik miljö där du kommer publiken nära. Välkommen till en autentisk teaterupplevelse.</p>
-                                    <div class="preview-cta-row"><span class="preview-btn-lg red-btn">Se vårt program</span><span class="preview-btn-outline">Köp biljetter</span></div>
-                                </div>
-                                <div class="preview-hero-img"><img src="https://images.unsplash.com/photo-1503095396549-807759245b35?w=400&h=300&fit=crop" alt="Teater"></div>
-                            </div>
-                            <div class="preview-services-row">
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=120&h=80&fit=crop" alt="Föreställning">
-                                    <div class="service-info">
-                                        <span class="service-name">Hamlet</span>
-                                        <span class="service-desc">Klassisk Shakespeare</span>
-                                    </div>
-                                    <span class="service-badge">Klassiker</span>
-                                </div>
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=120&h=80&fit=crop" alt="Modern">
-                                    <div class="service-info">
-                                        <span class="service-name">En modern pjäs</span>
-                                        <span class="service-desc">Nyskriven för 2025</span>
-                                    </div>
-                                    <span class="service-badge">Nypremiär</span>
-                                </div>
-                                <div class="preview-service-item">
-                                    <img src="https://images.unsplash.com/photo-1576426863848-c21f53c60b19?w=120&h=80&fit=crop" alt="Barn">
-                                    <div class="service-info">
-                                        <span class="service-name">Barnteater</span>
-                                        <span class="service-desc">Familjeföreställning</span>
-                                    </div>
-                                    <span class="service-badge">Familjevänlig</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="example-details">
-                        <span class="example-category">Scenkonst & Teater</span>
-                        <h3>Teatern Stockholm</h3>
-                        <p>En elegant och dynamisk hemsida för teatrar och scenkonstgrupper. Visa kommande föreställningar med vackra bilder, integrera biljettsystem, presentera ensemblen och bygg förväntan inför varje premiär.</p>
-                        <ul class="example-features"><li>Föreställningskalender</li><li>Integrerat biljettsystem</li><li>Om ensemblen & skådespelare</li><li>Press & recensioner</li><li>Bildgalleri från föreställningar</li><li>Nyhetsbrev-anmälan</li></ul>
-                        <button class="btn btn-primary" onclick="openModalWithBusiness('scenkonst', 'Scenkonst & Teater')">Jag vill ha en sådan här</button>
+                        <h3>Rosens Hudvård</h3>
+                        <p>En mörk och elegant hemsida för spa och skönhetssalonger. Stort hero-foto, behandlingsmeny och en atmosfär som speglar lugn och kvalitet.</p>
+                        <ul class="example-features">
+                            <li>Behandlingsmeny</li>
+                            <li>Online-bokning</li>
+                            <li>Bildgalleri</li>
+                            <li>Om oss-sektion</li>
+                        </ul>
+                        <a href="exempel-skonhet.html" class="btn btn-primary">Se hela exemplet</a>
                     </div>
                 </div>
 
@@ -1227,32 +934,6 @@
     <script>
         lucide.createIcons();
 
-        // Example search and filter functionality
-        function filterExamples() {
-            const searchInput = document.getElementById('exampleSearch').value.toLowerCase();
-            const examples = document.querySelectorAll('.example-card');
-
-            examples.forEach(example => {
-                const category = example.getAttribute('id') || '';
-                const title = example.querySelector('h3')?.textContent.toLowerCase() || '';
-                const description = example.querySelector('.example-details p')?.textContent.toLowerCase() || '';
-                const categoryTag = example.querySelector('.example-category')?.textContent.toLowerCase() || '';
-
-                const searchableText = category + ' ' + title + ' ' + description + ' ' + categoryTag;
-
-                if (searchableText.includes(searchInput)) {
-                    example.style.display = '';
-                } else {
-                    example.style.display = 'none';
-                }
-            });
-
-            // Reset active category when searching
-            if (searchInput) {
-                document.querySelectorAll('.category-tag').forEach(tag => tag.classList.remove('active'));
-            }
-        }
-
         function filterByCategory(category) {
             const examples = document.querySelectorAll('.example-card');
             const categoryTags = document.querySelectorAll('.category-tag');
@@ -1265,9 +946,6 @@
                     tag.classList.remove('active');
                 }
             });
-
-            // Clear search input
-            document.getElementById('exampleSearch').value = '';
 
             // Filter examples
             if (category === 'alla') {

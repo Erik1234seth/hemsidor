@@ -642,6 +642,7 @@ header nav {
 }
 
 .logo-dot.pink { background: #ec4899; }
+.logo-dot.purple { background: #a78baf; }
 
 .logo-square {
     width: 10px;
@@ -692,6 +693,7 @@ header nav {
 .pink-btn { background: #ec4899; }
 .gold-btn { background: #d97706; }
 .green-btn { background: #16a34a; }
+.purple-btn { background: #a78baf; }
 
 /* Preview Hero Full Width */
 .preview-hero-full {
@@ -700,10 +702,6 @@ header nav {
     gap: 20px;
     padding: 24px 20px;
     align-items: center;
-}
-
-.frisor-hero-full {
-    background: linear-gradient(135deg, #fdf4ff 0%, #fce7f3 100%);
 }
 
 .preview-hero-text {
@@ -735,6 +733,11 @@ header nav {
     color: #16a34a;
 }
 
+.purple-badge {
+    background: rgba(167, 139, 175, 0.15);
+    color: #a78baf;
+}
+
 .preview-heading {
     font-size: 1.15rem;
     font-weight: 800;
@@ -746,6 +749,7 @@ header nav {
 .highlight-pink { color: #ec4899; }
 .highlight-green { color: #16a34a; }
 .highlight-blue { color: var(--primary); }
+.highlight-purple { color: #a78baf; }
 
 .preview-paragraph {
     font-size: 0.7rem;
@@ -1065,6 +1069,102 @@ header nav {
     color: #16a34a;
     font-weight: 600;
     white-space: nowrap;
+}
+
+/* Frisör specific */
+.frisor-nav {
+    background: transparent;
+    border-bottom: none;
+}
+
+.frisor-logo {
+    font-family: 'Sacramento', cursive;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.frisor-script {
+    font-family: 'Sacramento', cursive;
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+
+.frisor-hero {
+    height: 240px;
+}
+
+.preview-reviews-bar {
+    display: flex;
+    gap: 8px;
+    padding: 12px 20px;
+    background: #faf8fb;
+    border-top: 1px solid #f0ecf2;
+}
+
+.preview-reviews-bar.dark-reviews {
+    background: #1a1a1a;
+    border-top: 1px solid #333;
+}
+
+.preview-review-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1px solid #f0ecf2;
+}
+
+.preview-review-card.dark-review {
+    background: #222;
+    border-color: #333;
+}
+
+.preview-review-card .review-stars-sm {
+    color: #bfa860;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.preview-review-card p {
+    font-size: 0.6rem;
+    color: #555;
+    line-height: 1.4;
+    font-style: italic;
+    margin-bottom: 4px;
+}
+
+.preview-review-card.dark-review p {
+    color: #aaa;
+}
+
+.preview-review-card span {
+    font-size: 0.55rem;
+    font-weight: 600;
+    color: #888;
+}
+
+/* Spa specific */
+.spa-nav {
+    background: transparent;
+    border-bottom: none;
+}
+
+.spa-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.spa-script {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.spa-hero {
+    height: 240px;
 }
 
 /* Konsult specific */
@@ -3135,7 +3235,7 @@ footer {
 
 /* ========== EXAMPLES SEARCH ========== */
 .examples-search {
-    padding: 40px 0;
+    padding: 16px 0;
     background: linear-gradient(to bottom, white, #f9fafb);
 }
 
@@ -3204,7 +3304,7 @@ footer {
 
 @media (max-width: 768px) {
     .examples-search {
-        padding: 24px 0;
+        padding: 12px 0;
     }
 
     .search-box-wrapper {

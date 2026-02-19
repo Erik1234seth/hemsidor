@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Monroe — Frisör & Salong</title>
+    <link rel="icon" type="image/png" href="logga.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; color: #1a1a1a; background: #111; }
+
+        /* Nav - transparent overlay */
+        nav { position: absolute; top: 0; left: 0; right: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: 24px 48px; }
+        .nav-logo { font-family: 'Sacramento', cursive; font-size: 28px; color: #fff; }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; }
+        .nav-cta { background: #bfa860; color: #fff; padding: 12px 28px; border-radius: 99px; font-weight: 600; font-size: 14px; text-decoration: none; transition: background 0.2s; }
+        .nav-cta:hover { background: #a89245; }
+
+        /* Hero - full viewport dark image */
+        .hero { position: relative; height: 100vh; min-height: 600px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .hero-bg { position: absolute; inset: 0; }
+        .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.45); }
+        .hero-content { position: relative; z-index: 2; text-align: center; padding: 20px; }
+        .hero-logo { font-family: 'Sacramento', cursive; font-size: 96px; color: #fff; line-height: 1.1; margin-bottom: 16px; }
+        .hero-subtitle { font-size: 16px; color: rgba(255,255,255,0.7); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; }
+
+        /* Section shared */
+        .section-label { font-size: 13px; font-weight: 700; color: #bfa860; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+        .section-title { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 36px; }
+        .btn-primary { background: #bfa860; color: #fff; padding: 14px 28px; border-radius: 99px; font-weight: 700; font-size: 15px; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s; display: inline-block; }
+        .btn-primary:hover { background: #a89245; }
+        .btn-outline { background: transparent; color: #fff; padding: 14px 28px; border-radius: 99px; font-weight: 600; font-size: 15px; text-decoration: none; border: 2px solid rgba(255,255,255,0.3); transition: all 0.2s; display: inline-block; }
+        .btn-outline:hover { border-color: #bfa860; color: #bfa860; }
+
+        /* Reviews */
+        .reviews { padding: 80px 48px; background: #1a1a1a; }
+        .reviews-inner { max-width: 1100px; margin: 0 auto; }
+        .reviews .section-title { color: #fff; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .review-card { background: #222; border-radius: 12px; padding: 24px; border: 1px solid #333; }
+        .review-stars { color: #bfa860; font-size: 16px; margin-bottom: 12px; letter-spacing: 2px; }
+        .review-text { font-size: 15px; color: #aaa; line-height: 1.6; margin-bottom: 16px; font-style: italic; }
+        .review-author { display: flex; align-items: center; gap: 10px; }
+        .review-avatar { width: 36px; height: 36px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #bfa860; }
+        .review-name { font-size: 14px; font-weight: 600; color: #fff; }
+        .review-date { font-size: 12px; color: #666; }
+
+        /* Services */
+        .services { padding: 80px 48px; background: #111; }
+        .services-inner { max-width: 1100px; margin: 0 auto; }
+        .services .section-title { color: #fff; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .service-card { border-radius: 12px; overflow: hidden; background: #1a1a1a; border: 1px solid #2a2a2a; transition: transform 0.2s; }
+        .service-card:hover { transform: translateY(-4px); }
+        .service-card img { width: 100%; height: 200px; object-fit: cover; }
+        .service-card-body { padding: 20px; }
+        .service-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; color: #fff; }
+        .service-card p { font-size: 14px; color: #888; margin-bottom: 12px; }
+        .service-tag { display: inline-block; padding: 4px 12px; background: rgba(191,168,96,0.15); color: #bfa860; border-radius: 99px; font-size: 12px; font-weight: 600; }
+
+        /* About */
+        .about { padding: 80px 48px; background: #1a1a1a; }
+        .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+        .about img { width: 100%; height: 360px; object-fit: cover; border-radius: 12px; }
+        .about h2 { font-size: 28px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em; color: #fff; }
+        .about p { font-size: 16px; color: #999; line-height: 1.7; margin-bottom: 12px; }
+
+        /* CTA */
+        .cta { padding: 80px 48px; text-align: center; background: #111; color: #fff; }
+        .cta h2 { font-family: 'Sacramento', cursive; font-size: 48px; font-weight: 400; margin-bottom: 12px; }
+        .cta p { font-size: 16px; color: #888; margin-bottom: 28px; }
+
+        /* Footer */
+        footer { padding: 32px 48px; background: #0a0a0a; text-align: center; }
+        footer p { font-size: 13px; color: #444; }
+
+        /* Back link */
+        .back-link { position: fixed; top: 16px; left: 16px; z-index: 100; background: rgba(0,0,0,0.6); color: #fff; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; backdrop-filter: blur(8px); }
+        .back-link:hover { background: rgba(0,0,0,0.8); }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .nav-logo { font-size: 24px; }
+            .hero { min-height: 500px; }
+            .hero-logo { font-size: 56px; }
+            .hero-subtitle { font-size: 13px; }
+            .reviews { padding: 48px 20px; }
+            .reviews-grid { grid-template-columns: 1fr; }
+            .services { padding: 48px 20px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .about { padding: 48px 20px; }
+            .about-inner { grid-template-columns: 1fr; }
+            .cta { padding: 48px 20px; }
+            .cta h2 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="exempel.html" class="back-link">&larr; Tillbaka till exempel</a>
+
+    <nav>
+        <div class="nav-logo">Studio Monroe</div>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Hem</a></li>
+            <li><a href="#">Om Oss</a></li>
+            <li><a href="#">Prislista</a></li>
+            <li><a href="#">Frisörer</a></li>
+        </ul>
+        <a href="#" class="nav-cta">Boka online</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1400&h=900&fit=crop" alt="Salong">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-logo">Studio Monroe</div>
+            <p class="hero-subtitle">Frisör & Salong</p>
+        </div>
+    </section>
+
+    <section class="reviews">
+        <div class="reviews-inner">
+            <span class="section-label">Kundrecensioner</span>
+            <h2 class="section-title">Vad våra kunder säger</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"Bästa salongen jag besökt! Lina förstod exakt vad jag ville och resultatet blev fantastiskt. Kommer definitivt tillbaka."</p>
+                    <div class="review-author">
+                        <div class="review-avatar">S</div>
+                        <div>
+                            <div class="review-name">Sandra K.</div>
+                            <div class="review-date">3 veckor sedan</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"Äntligen en frisör som lyssnar! Fick precis den balayage jag drömt om. Supermysig salong dessutom."</p>
+                    <div class="review-author">
+                        <div class="review-avatar">E</div>
+                        <div>
+                            <div class="review-name">Emma L.</div>
+                            <div class="review-date">1 månad sedan</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"Proffsigt från start till slut. Avslappnad stämning, bra rådgivning och ett resultat som överträffade mina förväntningar."</p>
+                    <div class="review-author">
+                        <div class="review-avatar">M</div>
+                        <div>
+                            <div class="review-name">Maria A.</div>
+                            <div class="review-date">2 månader sedan</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="services-inner">
+            <span class="section-label">Våra behandlingar</span>
+            <h2 class="section-title">Hitta din favorit</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=400&h=280&fit=crop" alt="Klippning">
+                    <div class="service-card-body">
+                        <h3>Klippning</h3>
+                        <p>Dam & herr. Konsultation, tvätt, klipp och styling.</p>
+                        <span class="service-tag">Från 450 kr</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=280&fit=crop" alt="Färg & Slingor">
+                    <div class="service-card-body">
+                        <h3>Färg & Slingor</h3>
+                        <p>Helfärg, slingor, balayage och toner i premiumkvalitet.</p>
+                        <span class="service-tag">Populärast</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=400&h=280&fit=crop" alt="Styling">
+                    <div class="service-card-body">
+                        <h3>Styling & Upplägg</h3>
+                        <p>Fest, bröllop eller vardag. Vi skapar din perfekta look.</p>
+                        <span class="service-tag">Från 350 kr</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="about-inner">
+            <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?w=600&h=400&fit=crop" alt="Teamet">
+            <div>
+                <span class="section-label">Om oss</span>
+                <h2>Kreativitet i varje klipp</h2>
+                <p>Studio Monroe grundades med en enkel idé — att varje besök ska kännas som en upplevelse. Vår salong i Stockholms innerstad är en plats där du kan slappna av medan vårt team tar hand om dig.</p>
+                <p>Vi jobbar bara med premiumprodukter och håller oss ständigt uppdaterade med de senaste trenderna och teknikerna.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Redo att boka?</h2>
+        <p>Välj en tid som passar dig — vi ser fram emot ditt besök.</p>
+        <a href="#" class="btn-primary">Boka din tid nu</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Studio Monroe. Exempelsida skapad av HemsidaNu.</p>
+    </footer>
+</body>
+</html>
