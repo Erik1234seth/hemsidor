@@ -1941,22 +1941,22 @@ footer {
 .option-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 10px;
 }
 
 .option-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    padding: 20px 16px;
+    gap: 8px;
+    padding: 14px 12px;
     background: var(--bg-subtle);
     border: 2px solid var(--border);
     border-radius: var(--radius);
     cursor: pointer;
     transition: all 0.2s;
     font-family: inherit;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
     color: var(--text);
 }
@@ -1973,8 +1973,8 @@ footer {
 }
 
 .option-icon {
-    width: 56px;
-    height: 56px;
+    width: 42px;
+    height: 42px;
     background: white;
     border-radius: var(--radius);
     display: flex;
@@ -1984,8 +1984,8 @@ footer {
 }
 
 .option-icon svg {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     stroke-width: 2;
 }
 
