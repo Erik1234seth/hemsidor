@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="contact-method-content">
                                     <h3>Besök oss</h3>
-                                    <p>Storgatan 1, Göteborg</p>
+                                    <p>Ulrikedalsvägen 10C</p>
                                     <span class="contact-note">Boka tid först</span>
                                 </div>
                             </div>
@@ -309,10 +309,32 @@
 
     <script src="modal.js"></script>
     <script>
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+        document.querySelector('.contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
+            const data = {
+                name: this.querySelector('#name').value.trim(),
+                email: this.querySelector('#email').value.trim(),
+                phone: this.querySelector('#phone').value.trim() || null,
+                business: this.querySelector('#business').value.trim() || null,
+                message: this.querySelector('#message').value.trim() || null,
+                source: 'kontakt'
+            };
+
             this.style.display = 'none';
             document.getElementById('formConfirmation').style.display = 'block';
+
+            try {
+                await fetch(`${SUPABASE_URL}/rest/v1/contact_messages`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Prefer': 'return=minimal' },
+                    body: JSON.stringify(data)
+                });
+                await fetch(`${SUPABASE_URL}/functions/v1/send-contact-email`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
+                    body: JSON.stringify(data)
+                });
+            } catch (err) { console.error('Failed to send contact:', err); }
         });
     </script>
 </body>

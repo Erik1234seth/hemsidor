@@ -511,6 +511,8 @@ async function saveBookingToSupabase(booking) {
 document.addEventListener('DOMContentLoaded', function() {
     // Open modal when clicking CTA buttons
     document.querySelectorAll('a[href="#kontakt"], a[href="kontakt.html"], .nav-cta, .btn-primary').forEach(link => {
+        // Skip form submit buttons and links with their own onclick
+        if (link.type === 'submit' || link.getAttribute('onclick')) return;
         const text = link.textContent.toLowerCase();
         if (text.includes('starta') || text.includes('kom igång') || text.includes('boka') || text.includes('gratis')) {
             link.addEventListener('click', (e) => {
