@@ -2779,7 +2779,8 @@ footer {
     .example-card { margin-bottom: 50px; padding-bottom: 50px; }
     .example-details h3 { font-size: 1.5rem; }
     /* Modal responsive */
-    .modal { padding: 24px; max-height: 95vh; }
+    .modal-overlay { padding: 16px 12px; }
+    .modal { padding: 24px; max-height: 92vh; }
     .option-grid { grid-template-columns: repeat(2, 1fr); }
     .checkbox-grid { grid-template-columns: 1fr; }
     .calendar-days { gap: 4px; }
