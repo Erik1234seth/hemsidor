@@ -2780,7 +2780,7 @@ footer {
     .example-details h3 { font-size: 1.5rem; }
     /* Modal responsive */
     .modal-overlay { padding: 0; align-items: flex-end; }
-    .modal { padding: 24px 20px; padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px)); max-height: 85vh; border-radius: 16px 16px 0 0; }
+    .modal { padding: 32px 20px 24px; padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px)); max-height: 85vh; border-radius: 16px 16px 0 0; }
     .modal-close { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 20px; }
     .option-grid { grid-template-columns: repeat(2, 1fr); }
     .checkbox-grid { grid-template-columns: 1fr; }
