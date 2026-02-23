@@ -426,7 +426,18 @@ function selectTime(time, element) {
     document.querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
     element.classList.add('selected');
 
-    document.getElementById('confirmBooking').disabled = false;
+    // Format date for confirmation dialog
+    const dateStr = `${selectedDate.getDate()} ${monthNames[selectedDate.getMonth()]} ${selectedDate.getFullYear()}`;
+
+    // Show confirmation dialog
+    if (confirm(`Bekräfta bokning för ${dateStr} kl. ${selectedTime}?`)) {
+        confirmBooking();
+    } else {
+        // User cancelled, deselect the time
+        element.classList.remove('selected');
+        selectedTime = null;
+        bookingData.time = '';
+    }
 }
 
 async function confirmBooking() {

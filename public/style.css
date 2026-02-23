@@ -2782,6 +2782,7 @@ footer {
     .modal-overlay { padding: 20px; align-items: center; }
     .modal { padding: 24px 20px 20px; max-height: 80vh; border-radius: 16px; }
     .modal-close { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 20px; }
+    .modal .btn { padding: 12px 20px; font-size: 0.95rem; }
     .modal-step h2 { font-size: 1.25rem; margin-bottom: 6px; }
     .modal-desc { margin-bottom: 16px; }
     .modal-buttons { margin-top: 16px; }
