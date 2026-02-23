@@ -982,6 +982,18 @@
         </div>
     </div>
 
+    <!-- Time Confirmation Popup -->
+    <div class="time-confirm-overlay" id="timeConfirmPopup">
+        <div class="time-confirm-box">
+            <h3>Bekräfta bokning</h3>
+            <p id="timeConfirmText">Vill du boka detta datum och tid?</p>
+            <div class="time-confirm-buttons">
+                <button class="btn btn-secondary" onclick="cancelTimeSelection()">Avbryt</button>
+                <button class="btn btn-primary" onclick="proceedWithBooking()">Bekräfta</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Niche data for homepage example switcher
         const nicheData = {

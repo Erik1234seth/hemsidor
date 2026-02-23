@@ -418,26 +418,44 @@ async function generateTimeSlots() {
     });
 }
 
+let selectedTimeElement = null;
+
 function selectTime(time, element) {
     selectedTime = time;
     bookingData.time = time;
     bookingData.date = selectedDate;
+    selectedTimeElement = element;
 
     document.querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
     element.classList.add('selected');
 
-    // Format date for confirmation dialog
+    // Format date for confirmation popup
     const dateStr = `${selectedDate.getDate()} ${monthNames[selectedDate.getMonth()]} ${selectedDate.getFullYear()}`;
 
-    // Show confirmation dialog
-    if (confirm(`Bekräfta bokning för ${dateStr} kl. ${selectedTime}?`)) {
-        confirmBooking();
-    } else {
-        // User cancelled, deselect the time
-        element.classList.remove('selected');
-        selectedTime = null;
-        bookingData.time = '';
+    // Update popup text and show it
+    document.getElementById('timeConfirmText').textContent = `Bekräfta bokning för ${dateStr} kl. ${selectedTime}?`;
+    document.getElementById('timeConfirmPopup').classList.add('active');
+}
+
+function cancelTimeSelection() {
+    // Hide popup
+    document.getElementById('timeConfirmPopup').classList.remove('active');
+
+    // Deselect the time
+    if (selectedTimeElement) {
+        selectedTimeElement.classList.remove('selected');
     }
+    selectedTime = null;
+    selectedTimeElement = null;
+    bookingData.time = '';
+}
+
+function proceedWithBooking() {
+    // Hide popup
+    document.getElementById('timeConfirmPopup').classList.remove('active');
+
+    // Proceed with booking
+    confirmBooking();
 }
 
 async function confirmBooking() {
