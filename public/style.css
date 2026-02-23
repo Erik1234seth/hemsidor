@@ -2780,18 +2780,23 @@ footer {
     .example-details h3 { font-size: 1.5rem; }
     /* Modal responsive */
     .modal-overlay { padding: 20px; align-items: center; }
-    .modal { padding: 32px 20px; max-height: 80vh; border-radius: 16px; }
+    .modal { padding: 24px 20px 20px; max-height: 80vh; border-radius: 16px; }
     .modal-close { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 20px; }
-    .option-grid { grid-template-columns: repeat(2, 1fr); }
+    .modal-step h2 { font-size: 1.25rem; margin-bottom: 6px; }
+    .modal-desc { margin-bottom: 16px; }
+    .modal-buttons { margin-top: 16px; }
+    .modal-form .form-group { margin-bottom: 12px; }
+    .modal-form .form-group:last-child { margin-bottom: 16px; }
+    .option-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .option-card { padding: 12px 10px; }
+    .option-list { gap: 8px; }
+    .option-card-wide { padding: 14px 16px; }
     .checkbox-grid { grid-template-columns: 1fr; }
-    .option-title { font-size: 1rem; }
-    .option-subtitle { font-size: 0.9rem; }
     .calendar-days { gap: 4px; }
     .calendar-day { padding: 8px 4px; }
     .day-name { font-size: 0.6rem; }
     .day-number { font-size: 0.9rem; }
     .time-slots { grid-template-columns: repeat(3, 1fr); }
-    .modal-step h2 { font-size: 1.25rem; }
 }
 
 /* ========== ADMIN STYLES ========== */
