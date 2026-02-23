@@ -2836,6 +2836,7 @@ footer {
     .example-card { margin-bottom: 50px; padding-bottom: 50px; }
     .example-details h3 { font-size: 1.5rem; }
     /* Modal responsive */
+    .hide-on-mobile { display: none !important; }
     .modal-overlay { padding: 20px; align-items: center; }
     .modal { padding: 24px 20px 20px; max-height: 80vh; border-radius: 16px; }
     .modal-close { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 20px; }
