@@ -31,11 +31,23 @@ function getMonday(d) {
     return d;
 }
 
+// If today is Friday/Saturday/Sunday, open on next week so the calendar
+// doesn't start mostly filled with past/fully-booked days.
+function getInitialCalendarStart() {
+    const today = getToday();
+    const dow = today.getDay(); // 0=Sun, 5=Fri, 6=Sat
+    const monday = getMonday(today);
+    if (dow === 0 || dow === 5 || dow === 6) {
+        monday.setDate(monday.getDate() + 7);
+    }
+    return monday;
+}
+
 function openModal() {
     document.getElementById('bookingModal').classList.add('active');
     document.body.style.overflow = 'hidden';
     currentStep = 1;
-    calendarStart = getMonday(new Date());
+    calendarStart = getInitialCalendarStart();
     updateProgress();
     showStep(1);
     generateCalendar();
@@ -46,7 +58,7 @@ function openModalWithBusiness(businessValue, businessLabel) {
     document.getElementById('bookingModal').classList.add('active');
     document.body.style.overflow = 'hidden';
     currentStep = 1;
-    calendarStart = getMonday(new Date());
+    calendarStart = getInitialCalendarStart();
     updateProgress();
     showStep(1);
     generateCalendar();
@@ -278,6 +290,24 @@ const monthNames = ['Januari', 'Februari', 'Mars', 'April', 'Maj', 'Juni',
                    'Juli', 'Augusti', 'September', 'Oktober', 'November', 'December'];
 const dayNames = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör', 'Sön'];
 
+// Hardcoded demo bookings based on days from today (1 = tomorrow, 2 = day after, etc.)
+function getFakeBookings(date) {
+    const today = getToday();
+    const diffDays = Math.round((date - today) / (1000 * 60 * 60 * 24));
+    const patterns = {
+        1: ['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30',
+            '12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30',
+            '16:00','16:30','17:00','17:30'],
+        2: ['08:30','09:00','10:00','10:30','11:30','13:00','14:30','15:00','16:00'],
+        3: ['08:00','09:30','11:00','12:00','13:30','15:30','17:00'],
+        4: ['09:00','10:30','12:30','14:00','16:30'],
+        5: ['08:30','10:00','11:30','14:30','17:00'],
+        6: ['09:00','12:00','15:00','16:00'],
+        7: ['10:30','13:00','14:00'],
+    };
+    return new Set(patterns[diffDays] || []);
+}
+
 function generateCalendar() {
     const container = document.getElementById('calendarDays');
     if (!container) return;
@@ -315,13 +345,15 @@ function generateCalendar() {
         dayEl.onclick = () => selectDate(date, dayEl);
         container.appendChild(dayEl);
 
-        // Auto-select tomorrow on first load
-        const tomorrow = new Date(today);
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        if (!selectedDate && date.toDateString() === tomorrow.toDateString()) {
-            selectedDate = date;
-            dayEl.classList.add('selected');
-            setTimeout(() => generateTimeSlots(), 0);
+        // Auto-select first day with available slots on first load
+        if (!selectedDate && !isPastOrToday) {
+            const fakeBooked = getFakeBookings(date);
+            const totalSlots = 20;
+            if (fakeBooked.size < totalSlots) {
+                selectedDate = date;
+                dayEl.classList.add('selected');
+                setTimeout(() => generateTimeSlots(), 0);
+            }
         }
     }
 
@@ -336,6 +368,13 @@ function generateCalendar() {
         } else {
             monthEl.textContent = `${monthNames[calendarStart.getMonth()]} - ${monthNames[endDate.getMonth()]} ${endDate.getFullYear()}`;
         }
+    }
+
+    // Update prev button state (can't go before current week)
+    const prevBtn = document.getElementById('prevWeekBtn');
+    if (prevBtn) {
+        const minWeek = getMonday(new Date());
+        prevBtn.disabled = calendarStart <= minWeek;
     }
 }
 
@@ -396,6 +435,10 @@ async function generateTimeSlots() {
         } catch (err) {
             console.error('Failed to fetch booked times:', err);
         }
+
+        // Merge hardcoded demo bookings
+        const fakeBooked = getFakeBookings(selectedDate);
+        fakeBooked.forEach(t => unavailable.add(t));
     }
 
     container.innerHTML = '';

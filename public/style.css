@@ -2510,9 +2510,14 @@ footer {
     transition: all 0.2s;
 }
 
-.calendar-nav:hover {
+.calendar-nav:hover:not(:disabled) {
     border-color: var(--primary);
     color: var(--primary);
+}
+
+.calendar-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
 }
 
 .calendar-days {
