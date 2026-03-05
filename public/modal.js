@@ -1,6 +1,6 @@
 // ===== Booking Modal =====
 let currentStep = 1;
-const totalSteps = 5;
+const totalSteps = 4;
 let bookingData = {
     business: '',
     hasWebsite: '',
@@ -96,6 +96,12 @@ function closeModal() {
         selectedTime = null;
         document.querySelectorAll('.option-card, .option-card-wide').forEach(c => c.classList.remove('selected'));
         document.querySelectorAll('.checkbox-card input').forEach(c => c.checked = false);
+        const branschInput = document.getElementById('bransch-input');
+        if (branschInput) branschInput.value = '';
+        const leadEmail = document.getElementById('lead-email');
+        if (leadEmail) { leadEmail.value = ''; leadEmail.style.borderColor = '#e5e7eb'; }
+        const leadPhone = document.getElementById('lead-phone');
+        if (leadPhone) { leadPhone.value = ''; leadPhone.style.borderColor = '#e5e7eb'; }
         const form = document.getElementById('contactForm');
         if (form) form.reset();
         const progress = document.querySelector('.modal-progress');
@@ -122,7 +128,6 @@ function nextStep() {
         currentStep++;
         updateProgress();
         showStep(currentStep);
-        if (currentStep === 5) generateCalendar();
     }
 }
 
@@ -132,6 +137,81 @@ function prevStep() {
         updateProgress();
         showStep(currentStep);
     }
+}
+
+// Step 1: Submit bransch from text input
+function submitBransch() {
+    const input = document.getElementById('bransch-input');
+    if (!input) return;
+    const value = input.value.trim();
+    if (!value) {
+        input.style.borderColor = '#ef4444';
+        input.focus();
+        return;
+    }
+    input.style.borderColor = '#e5e7eb';
+    bookingData.business = value;
+    bookingData.businessLabel = value;
+    nextStep();
+}
+
+// Step 4 (new): Submit lead (email + phone)
+async function submitLead() {
+    const emailInput = document.getElementById('lead-email');
+    const phoneInput = document.getElementById('lead-phone');
+
+    const email = emailInput.value.trim();
+    const phone = phoneInput.value.trim();
+
+    if (!email || !email.includes('@')) {
+        emailInput.style.borderColor = '#ef4444';
+        emailInput.focus();
+        return;
+    }
+    emailInput.style.borderColor = '#e5e7eb';
+
+    if (!phone) {
+        phoneInput.style.borderColor = '#ef4444';
+        phoneInput.focus();
+        return;
+    }
+    phoneInput.style.borderColor = '#e5e7eb';
+
+    bookingData.email = email;
+    bookingData.phone = phone;
+
+    // Collect goals
+    bookingData.goals = [];
+    document.querySelectorAll('input[name="goals"]:checked').forEach(cb => {
+        bookingData.goals.push(cb.value);
+    });
+
+    // Save lead to Supabase
+    try {
+        await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify({
+                email: bookingData.email,
+                phone: bookingData.phone,
+                bransch: bookingData.businessLabel || bookingData.business,
+                has_website: bookingData.hasWebsite,
+                goals: bookingData.goals
+            })
+        });
+    } catch (err) {
+        console.error('Failed to save lead:', err);
+    }
+
+    // Show confirmation
+    document.querySelectorAll('.modal-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('stepConfirm').classList.add('active');
+    document.querySelector('.modal-progress').style.display = 'none';
 }
 
 // Unified business selection

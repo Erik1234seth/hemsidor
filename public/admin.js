@@ -3,6 +3,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const ADMIN_PASSWORD = 'Erik0511';
 
 let bookings = [];
+let leads = [];
 let adminCalendarStart = getAdminMonday(new Date());
 
 // ========== AUTH ==========
@@ -30,6 +31,7 @@ function showDashboard() {
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('dashboard').classList.remove('hidden');
     loadBookings();
+    loadLeads();
 }
 
 // ========== DATA ==========
@@ -84,6 +86,86 @@ async function deleteBooking(id) {
     } catch (err) {
         console.error('Failed to delete booking:', err);
     }
+}
+
+// ========== LEADS ==========
+
+async function loadLeads() {
+    try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/leads?order=created_at.desc`, {
+            headers: {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+            }
+        });
+        leads = await res.json();
+        renderLeads();
+    } catch (err) {
+        console.error('Failed to load leads:', err);
+    }
+}
+
+async function deleteLead(id) {
+    if (!confirm('Ta bort denna lead?')) return;
+    try {
+        await fetch(`${SUPABASE_URL}/rest/v1/leads?id=eq.${id}`, {
+            method: 'DELETE',
+            headers: {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+            }
+        });
+        await loadLeads();
+    } catch (err) {
+        console.error('Failed to delete lead:', err);
+    }
+}
+
+function renderLeads() {
+    const goalsMap = {
+        customers: 'Fler kunder',
+        professional: 'Se professionell',
+        showcase: 'Visa arbete',
+        booking: 'Ta bokningar',
+        google: 'Synas på Google',
+        sell: 'Sälja online'
+    };
+    const websiteMap = {
+        no: 'Nej',
+        'yes-update': 'Ja, förnyas',
+        'yes-new': 'Ja, ny'
+    };
+
+    document.getElementById('leadsStats').innerHTML = `
+        <div class="admin-stat-card">
+            <span class="admin-stat-number">${leads.length}</span>
+            <span class="admin-stat-label">Totalt</span>
+        </div>
+    `;
+
+    const tbody = document.getElementById('leadsTableBody');
+    const empty = document.getElementById('leadsEmpty');
+
+    if (leads.length === 0) {
+        tbody.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+    }
+
+    empty.classList.add('hidden');
+    tbody.innerHTML = leads.map(l => {
+        const goals = (l.goals || []).map(g => goalsMap[g] || g).join(', ') || '—';
+        const date = new Date(l.created_at).toLocaleDateString('sv-SE', { day: 'numeric', month: 'short', year: 'numeric' });
+        return `<tr>
+            <td><span class="table-date">${date}</span></td>
+            <td><a href="mailto:${escapeHtml(l.email)}">${escapeHtml(l.email)}</a></td>
+            <td><a href="tel:${escapeHtml(l.phone)}">${escapeHtml(l.phone)}</a></td>
+            <td>${escapeHtml(l.bransch || '—')}</td>
+            <td>${websiteMap[l.has_website] || l.has_website || '—'}</td>
+            <td style="font-size:13px;color:#6b7280;">${goals}</td>
+            <td><button class="btn btn-danger" style="padding:4px 10px;font-size:13px;" onclick="deleteLead('${l.id}')">Ta bort</button></td>
+        </tr>`;
+    }).join('');
 }
 
 // ========== STATS ==========
@@ -241,6 +323,11 @@ function switchView(view) {
         document.getElementById('listView').classList.add('active');
         document.getElementById('viewTitle').textContent = 'Bokningar';
         document.getElementById('viewSubtitle').textContent = 'Alla inkomna bokningar';
+    } else if (view === 'leads') {
+        document.getElementById('leadsView').classList.add('active');
+        document.getElementById('viewTitle').textContent = 'Leads';
+        document.getElementById('viewSubtitle').textContent = 'Intresseanmälningar från hemsidanu.se';
+        loadLeads();
     } else if (view === 'calendar') {
         document.getElementById('calendarView').classList.add('active');
         document.getElementById('viewTitle').textContent = 'Kalender';

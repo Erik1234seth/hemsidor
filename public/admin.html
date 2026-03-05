@@ -45,6 +45,10 @@
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="15" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7h16M6 1v4M14 1v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                     Kalender
                 </button>
+                <button class="admin-nav-btn" data-view="leads" onclick="switchView('leads')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM3 17a7 7 0 1 1 14 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    Leads
+                </button>
                 <button class="admin-nav-btn" data-view="revenue" onclick="switchView('revenue')">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 1v18M6 5h5.5a2.5 2.5 0 0 1 0 5H6M6 10h6.5a2.5 2.5 0 0 1 0 5H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     Intäkter
@@ -116,6 +120,31 @@
                     </button>
                 </div>
                 <div class="admin-calendar-grid" id="adminCalendarGrid"></div>
+            </div>
+
+            <!-- Leads View -->
+            <div class="admin-view" id="leadsView">
+                <div class="admin-stats" id="leadsStats"></div>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Datum</th>
+                                <th>Email</th>
+                                <th>Telefon</th>
+                                <th>Bransch</th>
+                                <th>Hemsida</th>
+                                <th>Mål</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="leadsTableBody"></tbody>
+                    </table>
+                    <div class="admin-empty hidden" id="leadsEmpty">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 12a8 8 0 1 1 0 16 8 8 0 0 1 0-16zM8 44a16 16 0 1 1 32 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+                        <p>Inga leads ännu</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Revenue View -->

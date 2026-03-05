@@ -522,14 +522,30 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
-                <span class="progress-text" id="progressText">Steg 1 av 5</span>
+                <span class="progress-text" id="progressText">Steg 1 av 4</span>
             </div>
 
-            <!-- Step 1: Business Type -->
+            <!-- Step 1: Bransch (text input) -->
             <div class="modal-step active" id="step1">
-                <h2>Vilken typ av verksamhet har du?</h2>
-                <p class="modal-desc">Välj den bransch som passar bäst för din verksamhet.</p>
+                <h2>Vad jobbar du med?</h2>
+                <p class="modal-desc">Skriv in din bransch så anpassar vi allt efter dig.</p>
 
+                <div class="form-group" style="margin-top: 24px;">
+                    <label for="bransch-input" style="font-weight:500; color:#374151; display:block; margin-bottom:8px;">Din bransch</label>
+                    <input type="text" id="bransch-input" placeholder="T.ex. Frisör, Byggföretag, Restaurang..." style="width:100%; padding:14px 16px; border:2px solid #e5e7eb; border-radius:10px; font-size:16px; box-sizing:border-box;" onkeydown="if(event.key==='Enter') submitBransch()">
+                </div>
+
+                <div class="modal-buttons" style="margin-top:24px; justify-content:flex-end;">
+                    <button class="btn btn-primary" onclick="submitBransch()">
+                        Fortsätt
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 12l4-4-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- OLD: Business grid (kept but hidden) -->
+                <div style="display:none">
                 <!-- Search Field (at the top) -->
                 <div class="business-search-box">
                     <input type="text" id="business-search" placeholder="Sök din bransch..." onkeyup="filterBusinesses()">
@@ -723,6 +739,7 @@
                     .expand-businesses-btn.expanded svg { transform: rotate(180deg); }
                     @media (max-width: 640px) { .business-grid { grid-template-columns: repeat(2, 1fr); } }
                 </style>
+                </div><!-- end hidden old grid -->
             </div>
 
             <!-- Step 2: Current Situation -->
@@ -866,8 +883,40 @@
                 </div>
             </div>
 
-            <!-- Step 4: Contact Info -->
+            <!-- Step 4: Lead capture (email + phone) -->
             <div class="modal-step" id="step4">
+                <h2>Nästan klart!</h2>
+                <p class="modal-desc">Lämna din email och ditt nummer så hör vi av oss för att komma igång.</p>
+
+                <div class="modal-form" style="margin-top:8px;">
+                    <div class="form-group">
+                        <label for="lead-email">Din email *</label>
+                        <input type="email" id="lead-email" placeholder="anna@exempel.se" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lead-phone">Ditt telefonnummer *</label>
+                        <input type="tel" id="lead-phone" placeholder="070-123 45 67" required>
+                    </div>
+                </div>
+
+                <div class="modal-buttons" style="margin-top:24px;">
+                    <button class="modal-back" onclick="prevStep()">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Tillbaka
+                    </button>
+                    <button class="btn btn-primary" onclick="submitLead()">
+                        Skicka
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M13.333 4L6 11.333 2.667 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- OLD Step 4 (Contact form + calendar booking) - kept but not shown -->
+            <div class="modal-step" id="step4-old-contact">
                 <h2>Dina uppgifter</h2>
                 <p class="modal-desc">Så vi kan kontakta dig inför samtalet.</p>
 
@@ -906,8 +955,8 @@
                 </div>
             </div>
 
-            <!-- Step 5: Calendar -->
-            <div class="modal-step" id="step5">
+            <!-- OLD Step 5 (Calendar) - kept but not shown -->
+            <div class="modal-step" id="step5-old-calendar">
                 <h2>Boka ett gratis samtal om din hemsida</h2>
                 <p class="modal-desc">Vi diskuterar dina önskemål och hur din hemsida kan se ut. Helt kostnadsfritt, ca 15 minuter.</p>
 
@@ -960,21 +1009,10 @@
                             <path d="M32 18L21 29l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    <h2>Tack för din bokning!</h2>
-                    <p class="modal-desc">Vi har skickat en bekräftelse till din email.</p>
+                    <h2>Tack! Vi hör av oss snart.</h2>
+                    <p class="modal-desc">Vi återkommer till dig så snart som möjligt.</p>
 
-                    <div class="confirmation-details">
-                        <div class="confirmation-item">
-                            <span class="confirmation-label">Datum & tid</span>
-                            <span class="confirmation-value" id="confirmDateTime">-</span>
-                        </div>
-                        <div class="confirmation-item">
-                            <span class="confirmation-label">Samtalstyp</span>
-                            <span class="confirmation-value">Diskussion om din hemsida (15 min)</span>
-                        </div>
-                    </div>
-
-                    <p class="confirmation-note">Vi ringer dig för att gå igenom dina idéer och diskutera hur vi kan bygga din drömhemsida. Ingen förbindelse!</p>
+                    <p class="confirmation-note">Vi hör av oss inom kort för att gå igenom dina önskemål och diskutera hur vi kan bygga din hemsida. Ingen förbindelse!</p>
 
                     <button class="btn btn-primary" onclick="closeModal()">Stäng</button>
                 </div>
